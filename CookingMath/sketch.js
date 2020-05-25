@@ -9,7 +9,7 @@ var scor = 0
 var com = (Math.floor((Math.random() * 100) + 10))
 
 function setup() {
-  createCanvas(720,405);
+  createCanvas(1920,1080);
   for (var i =0;i<9;i++){
     chiffres[i]= new chiffre(i+1,width/20,2*height/15+(10-i+1)*height/15)
   }
