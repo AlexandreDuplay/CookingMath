@@ -27,11 +27,11 @@ function setup() {
 }
 
 function mousePressed(){
-  if(dep.clicked(selecte,com)){
-    if(resboo){
-      results.splice(resref,1)
-      res --
-      resref = 0
+  if(dep.clicked()){
+    results.splice(resref,1)
+    res --
+    resref = 0
+    if(resboo && selecte==com){ 
       scor += com
       com = (Math.floor((Math.random() * 100) + 10))
     }

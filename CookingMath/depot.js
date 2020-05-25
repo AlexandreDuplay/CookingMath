@@ -5,13 +5,11 @@ function depot(){
     rect(width/2,height/3,width/15,2*height/3-height/15)
   }
   
-  this.clicked = function(sel,com){
+  this.clicked = function(){
     var distx = mouseX - width/2
     var disty = mouseY -height/3
     if(distx <= width/15 && distx >=0 && disty <= 2*height/3-height/15 && disty >=0) {
-      if(sel==com){
-        return true
-      }
+      return true
     }
   }
   
