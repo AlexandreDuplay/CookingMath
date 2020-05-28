@@ -1,5 +1,100 @@
-function sketch(){
+var mgr = new SceneManager();
+mgr.wire(); 
+myStorage = window.localStorage;
+var user
 
+function setup()
+{
+    createCanvas(windowWidth,windowHeight);
+    mgr.showScene( menu );  
+    
+    
+}
+
+function test(){
+  
+  this.setup = function(){
+    createCanvas(windowWidth,windowHeight);
+    myBut = new Clickable();     
+    myBut.locate(width/2, 3*height/4);        
+    myBut.onPress = function(){ 
+      nom.position(width/2-nom.width/2, 4*height/10)
+      mgr.showScene( menu ); 
+    }
+  }
+  
+  this.draw = function(){
+    background(220)
+    textSize(height/10);
+    text("Game Over",width/2,height/2) 
+    myBut.draw()
+    
+    
+  }
+  
+
+}
+function menuselection(){
+  this.setup=function()
+  {
+    createCanvas(windowWidth,windowHeight);
+    myButton2 = new Clickable();     
+    myButton2.text="mode infini"
+    myButton2.locate(width/2-myButton2.width/2, height/2);        
+    myButton2.onPress = function(){ 
+      mgr.showScene( sketch ); 
+    }
+    
+  }
+
+  this.draw=function(){
+    background(220);
+    myButton2.draw()
+  }
+
+}
+
+
+
+
+function menu(){
+
+this.setup=function()
+{
+    createCanvas(windowWidth,windowHeight);
+    nom = createInput()
+    nom.position(width/2-nom.width/2, 4*height/10)
+    myButton1 = new Clickable();     
+    myButton1.text="valider"
+    myButton1.locate(width/2-myButton1.width/2, height/2);        
+    myButton1.onPress = function(){ 
+      user =nom.value()
+      if(user==""){
+        alert("rentrez un nom")
+        return
+      }
+      nom.position(-1000,-1000)
+      mgr.showScene( menuselection ); 
+    }
+    
+}
+
+this.draw=function(){
+
+  background(220);
+  myButton1.draw()
+  stroke(0)
+  textSize(width/10)
+  text("Cooking Math",width/2, height/5)
+  textSize(width/25)
+  text("Nom:",width/2, 7*height/20)
+  //line(width/2,0,width/2,height)
+  
+}
+}
+
+function sketch(){
+  
 var chiffres = []
 var calculators = []
 var selecte = 0
@@ -12,6 +107,7 @@ var commandes = []
 var numcomm = 0
 var cmpt =0
 var perdu = 0
+var highScore = 0
 
 this.setup = function(){
   createCanvas(windowWidth,windowHeight);
@@ -28,7 +124,7 @@ this.setup = function(){
   
   ///zone de dépot des commandes
   dep =new depot()
-  
+  highScore= myStorage.getItem(''+user)
   
   
 }
@@ -39,7 +135,7 @@ function demande(){
   numcomm++
 }
 
-function mousePressed(){
+this.mousePressed=function(){
   if(dep.clicked()){
     results.splice(resref,1)
     res --
@@ -91,12 +187,16 @@ function mousePressed(){
 }
 
 this.draw = function() {
-  if(perdu>=1){
-    //this.mgr.showScene( perdu);
+  if(scor>highScore){
+     highScore=scor
   }
-  stroke(0)
-  textSize(height/10);
-  text("Game Over",width/2,height/2)  
+  
+  if(perdu>=2){
+    myStorage.setItem(''+user, highScore);
+    perdu=0
+    mgr.showScene( test ); 
+  }
+   
   if( cmpt ==0){
     demande()
   }
@@ -112,7 +212,6 @@ this.draw = function() {
       commandes.splice(i,1)
       numcomm--
       perdu++
-      console.log(perdu)
     }
   }
   
@@ -135,16 +234,19 @@ this.draw = function() {
   
   ///affichage du chiffre selectioné
   textSize(height/30);
-  text("selection : ",0,height/15)
+  text("selection : ",width/18,height/15)
   
   textSize(height/18);
-  text(""+selecte,width/11,height/15)
+  text(""+selecte,width/8,height/15)
   ///
   
   
   /// score test 
   textSize(height/30);
-  text("score : "+scor,0,height/15+2*height/20)
+  text("score : "+scor,width/18,height/15+2*height/20)
+  
+  textSize(height/30);
+  text("Hscore : "+highScore,width/16,height/15+3*height/20)
   
   
   stroke(0)
@@ -161,3 +263,4 @@ this.draw = function() {
   line(width/7+width/15,height/10,6*width/7-width/15,height/10)
 }
   }
+    

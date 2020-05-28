@@ -16,9 +16,9 @@ function calculator(ope,x_,y_){
     stroke(0);
     fill(0,0,0);
     textSize(height/20);
-    text(""+this.operat,this.x+3*this.cote/10, this.y+7*this.cote/10);
-    text(""+this.a, this.alihoria(), this.y+7*this.cote/10-this.cote);
-    text(""+this.b, this.alihorib(), this.y+7*this.cote/10+this.cote);
+    text(""+this.operat,this.x+this.cote/2, this.y+6*this.cote/11);
+    text(""+this.a, this.x+this.cote/2, this.y+6*this.cote/11-this.cote);
+    text(""+this.b, this.x+this.cote/2, this.y+6*this.cote/11+this.cote);
   }
   
   this.calcul=function(){

@@ -13,15 +13,10 @@ function result(num,calc,x_,y_){
     stroke(0);
     fill(0,0,0);
     textSize(height/20);
-    text(""+this.chiffre, this.alihori(), this.y+7*this.cote/10);
+    text(""+this.chiffre,this.x+this.cote/2, this.y+6*this.cote/11);
   }
   
-  this.alihori = function(){
-    if(this.chiffre>=10){
-      return this.x+1*this.cote/12
-    }
-    return this.x+3*this.cote/10
-  }
+
   
   this.clicked = function(){
     var distx = mouseX -this.x

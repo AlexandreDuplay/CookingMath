@@ -12,7 +12,7 @@ function chiffre(num,x_,y_){
     stroke(0);
     fill(0,0,0);
     textSize(height/20);
-    text(""+this.chiffre, this.x+3*this.cote/10, this.y+7*this.cote/10);
+    text(""+this.chiffre, this.x+this.cote/2, this.y+6*this.cote/11);
   }
   
   this.clicked = function(){
