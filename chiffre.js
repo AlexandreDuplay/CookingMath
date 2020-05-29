@@ -19,7 +19,6 @@ function chiffre(num,x_,y_){
     var distx = mouseX -this.x
     var disty = mouseY -this.y
     if(distx <= this.cote && distx >= 0 &&  disty <= this.cote && disty >=0) {
-      console.log(this.chiffre)
       return (this.chiffre)
     }
     return 0

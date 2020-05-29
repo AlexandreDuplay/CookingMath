@@ -35,21 +35,68 @@ function test(){
 
 }
 function menuselection(){
+  
+var bouts = []
+
   this.setup=function()
   {
     createCanvas(windowWidth,windowHeight);
-    myButton2 = new Clickable();     
-    myButton2.text="mode infini"
-    myButton2.locate(width/2-myButton2.width/2, height/2);        
-    myButton2.onPress = function(){ 
+    var ready = false
+    var saveP = myStorage.getItem(''+user)
+    var lvlLock =""
+    if(myStorage.getItem(''+user)==null){
+    lvlLock = 0
+    }else {
+      for(var i = 0;i<saveP.length;i++){
+        if(saveP.charAt(i)==','){
+          ready =true
+        }
+        if(saveP.charAt(i)!=',' && ready){
+          lvlLock += saveP.charAt(i)
+        }
+      }
+    }
+    var x =width/6
+    var y = height/6
+    for(var i =0; i< 20;i++){  
+      if(i%5==0 ){
+        x = width/6
+      }else{
+        x += width/6
+      }
+      
+      if(i%5==0 && i>0){
+        y += height/6
+      }
+      bouts[i]=new Clickable(); 
+      bouts[i].locate(x-bouts[i].width/2, y);
+      bouts[i].text="niveau "+(i+1)
+      if(lvlLock>=i){
+        bouts[i].color=255
+      }else {
+        bouts[i].color=100
+      }
+    }
+    
+    ///mode infini
+    myButtonin = new Clickable();     
+    myButtonin.text="mode infini"
+    myButtonin.locate(width/2-myButtonin.width/2, 5*height/6); 
+    myButtonin.onPress = function(){ 
+      
       mgr.showScene( sketch ); 
     }
+    ///
     
   }
 
   this.draw=function(){
     background(220);
-    myButton2.draw()
+    myButtonin.draw()
+    
+    for(var i =0; i< bouts.length;i++){
+      bouts[i].draw()
+    }
   }
 
 }
@@ -102,12 +149,12 @@ var results = []
 var res = 0
 var resboo = false
 var resref =0
-var scor = 0
+var scor =0
 var commandes = []
 var numcomm = 0
 var cmpt =0
 var perdu = 0
-var highScore = 0
+var highScore =""
 
 this.setup = function(){
   createCanvas(windowWidth,windowHeight);
@@ -124,14 +171,23 @@ this.setup = function(){
   
   ///zone de dépot des commandes
   dep =new depot()
-  highScore= myStorage.getItem(''+user)
-  
+  if(myStorage.getItem(''+user)==null){
+    highScore = 0
+  }else {
+    var saveP = myStorage.getItem(''+user)
+    for(var i = 0;i<saveP.length;i++){
+      if(saveP.charAt(i)!=','){
+        highScore += saveP.charAt(i)
+      }else{
+        break
+      }
+    }
+  }
   
 }
 
 function demande(){  
   commandes[numcomm]= new commande()
-  console.log(commandes.length)
   numcomm++
 }
 
@@ -191,11 +247,7 @@ this.draw = function() {
      highScore=scor
   }
   
-  if(perdu>=2){
-    myStorage.setItem(''+user, highScore);
-    perdu=0
-    mgr.showScene( test ); 
-  }
+  
    
   if( cmpt ==0){
     demande()
@@ -261,6 +313,21 @@ this.draw = function() {
   ellipse(6*width/7-width/15,height/15,height/15,height/15)
   line(width/7+width/15,height/30,6*width/7-width/15,height/30)
   line(width/7+width/15,height/10,6*width/7-width/15,height/10)
+  
+  if(perdu>=2){
+    mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+    mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+    for (var i =commandes.length-1;i>=0;i--){
+      commandes.splice(i,1)
+      numcomm--
+    }
+    scor =0
+    cmpt = 0
+    myStorage.setItem(''+user, "");
+    myStorage.setItem(''+user, ""+highScore+","+floor(highScore/100));
+    perdu=0
+    mgr.showScene( test ); 
+  }
 }
   }
     

@@ -17,7 +17,6 @@ function commande(){
   
   this.update = function(){
     if(this.x>=6*width/7-width/15){
-      console.log("perdu")
       return true
     }
     this.x+=width/2000
