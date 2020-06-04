@@ -12,7 +12,7 @@ function drawtext(x, y, text_array) {
     var c = part[1];
     var w = textWidth(t);
     fill(c);
-    if(i==1){
+    if(i==1 || i ==3){
       textSize(width/70)
     }else{
       textSize(width/100)
@@ -53,6 +53,69 @@ function test() {
 
 }
 
+function yeah() {
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    myBut = new Clickable();
+    myBut.locate(width / 3-myBut.width/2,  2*height / 3);
+    myBut.onPress = function() {
+      mgr.showScene(menuselection);
+    }
+    myBut2 = new Clickable();
+    myBut2.locate(2*width / 3-myBut2.width/2, 2 * height / 3);
+    myBut2.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.showScene(menu);
+    }
+  }
+
+  this.draw = function() {
+    background(220)
+    textSize(height / 10);
+    text("Niveau Réussi", width / 2, height / 4)
+    myBut.draw()
+    textSize(height/20)
+    text("menu de sélection", width / 3, height / 2)
+    text("menu principal", 2*width / 3, height / 2)
+    myBut2.draw()
+  }
+}
+
+function yeahMedaille() {
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    myBut = new Clickable();
+    myBut.locate(width / 3-myBut.width/2,  2*height / 3);
+    myBut.onPress = function() {
+      mgr.showScene(menuselection);
+    }
+    myBut2 = new Clickable();
+    myBut2.locate(2*width / 3-myBut2.width/2, 2 * height / 3);
+    myBut2.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.showScene(menu);
+    }
+  }
+
+  this.draw = function() {
+    background(220)
+    textSize(height / 10);
+    text("Niveau Réussi", width / 2, height / 4)
+    myBut.draw()
+    textSize(height/20)
+    text("menu de sélection", width / 3, height / 2)
+    text("menu principal", 2*width / 3, height / 2)
+    myBut2.draw()
+    fill(255, 153, 51)
+    square(width/2-height/30,3*height/4,height/15)
+    textSize(height/30)
+    fill(0)
+    text("Vous avez débloqué la médaille de bronze des 'chefs des maths'", width/2, 3*height / 4+height/10)
+  }
+}
+
 function menuselection() {
 
   var bouts = []
@@ -91,9 +154,34 @@ function menuselection() {
       bouts[i].text = "niveau " + (i + 1)
       if (lvlLock >= i) {
         bouts[i].color = 255
-        bouts[i].onPress = function() {
-          mgr.showScene(niveau);
+        switch(i){
+          case 0:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau1);     
+            }
+            break;
+          case 1:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau2);     
+            }
+            break;
+          case 2:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau3);     
+            }
+            break;
+          case 3:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau4);     
+            }
+            break;
+          case 4:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau5);     
+            }
+            break;
         }
+        
       } else {
         bouts[i].color = 100
       }
@@ -239,6 +327,9 @@ function sketch() {
           commandes.splice(i, 1)
           numcomm--
           scor += com
+          if(cmpt<500){
+            cmpt = -50
+          }      
         }
       }
     }
@@ -355,15 +446,15 @@ function sketch() {
     line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
     
-    if(lvlLock>=1){
+    if(lvlLock>=5){
       fill(255, 153, 51)
       square(width / 2+width/7+width/15,height/2,width/15)
     }
-    if(lvlLock>=2){
+    if(lvlLock>=10){
       fill((102, 153, 153))
       square(width / 2+width/7+2*width/15,height/2,width/15)
     }
-    if(lvlLock>=3){
+    if(lvlLock>=20){
       fill(255, 215, 0)
       square(width / 2+width/7+3*width/15,height/2,width/15)
     }
@@ -378,17 +469,14 @@ function sketch() {
       scor = 0
       cmpt = 0
       myStorage.setItem('' + user, "");
-      myStorage.setItem('' + user, "" + highScore + "," + floor(highScore / 100));
+      myStorage.setItem('' + user, "" + highScore + "," +Math.max( floor(highScore / 100),lvlLock));
       perdu = 0
       mgr.showScene(test);
     }
   }
 }
 
-function niveau(x) {
-
-
-  var lvl = x
+function niveau1() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -403,17 +491,13 @@ function niveau(x) {
   var perdu = 0
   var ready = false
   var lvlLock = ""
+  var highScore = ""
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     chiffres[0] = new chiffre(6, width / 20, height / 2)
 
-    /// création des calculator
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-    //calculators[1] = new calculator("+",2*width/5,height/3+height/15)
-    //calculators[2] = new calculator("-",width/5,2*height/3+height/15)
-    //calculators[3] = new calculator("x",2*width/5,2*height/3+height/15)
-    ///
 
     demande()
     commandes[0].x = width / 2
@@ -438,18 +522,18 @@ function niveau(x) {
 
     ///zone de dépot des commandes
     dep = new depot()
-    //if(myStorage.getItem(''+user)==null){
-    //  highScore = 0
-    //}else {
-    //  var saveP = myStorage.getItem(''+user)
-    //  for(var i = 0;i<saveP.length;i++){
-    //    if(saveP.charAt(i)!=','){
-    //      highScore += saveP.charAt(i)
-    //    }else{
-    //      break
-    //    }
-    //  }
-    //}
+    if(myStorage.getItem(''+user)==null){
+     highScore = 0
+    }else {
+     var saveP = myStorage.getItem(''+user)
+     for(var i = 0;i<saveP.length;i++){
+       if(saveP.charAt(i)!=','){
+         highScore += saveP.charAt(i)
+       }else{
+         break
+       }
+     }
+    }
 
   }
 
@@ -510,31 +594,9 @@ function niveau(x) {
   }
 
   this.draw = function() {
-    //if(scor>highScore){
-    //   highScore=scor
-    //}
-
-
-
-
-    //if( cmpt ==0){
-    //  demande()
-    //}
-    //cmpt++
-    //if( cmpt %700 ==0){
-    //  demande()
-    //}
     background(220);
-
-
-
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
-      if (lvl > 5 && commandes[i].update()) {
-        commandes.splice(i, 1)
-        numcomm--
-        perdu++
-      }
     }
 
     dep.display()
@@ -587,44 +649,977 @@ function niveau(x) {
     fill(0, 0)
     ellipse(width / 2 + height / 30, height / 10 + height / 30, height / 11, height / 11)
     
-    if(lvlLock>=1){
+    if(lvlLock>=5){
       fill(255, 153, 51)
       square(width / 2+width/7+width/15,height/2,width/15)
     }
-    if(lvlLock>=2){
+    if(lvlLock>=10){
       fill((102, 153, 153))
       square(width / 2+width/7+2*width/15,height/2,width/15)
     }
-    if(lvlLock>=3){
+    if(lvlLock>=20){
       fill(255, 215, 0)
       square(width / 2+width/7+3*width/15,height/2,width/15)
     }
-
+    
     textAlign(LEFT)
-
     var col1 = [0, 0, 0];
     var col2 = [250,220,140];
-    var string = [
-      ["Bienvenu dans Cooking Math. Comme vous pouvez le voir vous avez déjà une", col1],
-      [" COMMANDE ", col2],
-    ];
-    drawtext(width / 7 + width / 14, 3 * height / 15 + height / 30, string);
+    var col3 = [200,100,100];
+    var col4 = [100,100,200];
+    var col5 = [100,200,100];
+    var col6 = [255,255,0];
+    if(selecte ==0 && (calculators[0].a ==0 && calculators[0].b ==0) && results.length ==0 ){
+      
+      var comtxt = [
+        ["Bienvenu dans Cooking Math. Comme vous pouvez le voir vous avez déjà une", col1],
+        [" COMMANDE ", col2],
+      ];
+      drawtext(width / 7 + width / 14, 3 * height / 15 + height / 45, comtxt);
+
+      var explitxt = [
+        ["Pour satisfaire vos clients vous devez effectuer un calcul, laissez moi vous montrer.", col1],
+      ];
+      drawtext(width / 7 + width / 14, 3 * height / 15 + 2*height / 45, explitxt);
+
+      var numtxt = [
+        ["Tout d'abord cliquez sur la case du", col1],
+        [" CHIFFRE        ", col3],
+        ["6 ", col1],
+      ];
+      drawtext(width / 7 + width / 14, 3 * height / 15 + 3*height / 45, numtxt);
+       
+    }else{
+        var comtxt = [
+          ["Parfait, maintenant pour utiliser la ", col1],
+          [" machine de calcul               ", col4],
+          ["placez votre 6 sur une des 2 cases '0'. ", col1],
+        ];
+        drawtext(width / 7 + width / 14, 3 * height / 15 + height / 45, comtxt);
+      
+      
+        
+      
+      if(calculators[0].a !=0 || calculators[0].b !=0){
+         var calctxt = [
+        ["Super, maintenant prends le deuxième 6 et mets le sur le 2ème '0'.", col1],
+      ];
+      drawtext(width / 7 + width / 14, 3 * height / 15 + 2*height / 45, calctxt);
+      }
+      if(results.length==1){
+        var restxt = [
+          ["Plus qu'une chose à faire, prennez le ", col1],
+          [" RESULTAT", col5],
+        ];
+        drawtext(width / 7 + width / 14, 3 * height / 15 + 5*height / 90, restxt);
+        var res2txt = [
+          ["Et placez le dans la ", col1],
+          [" zone de dépos.", col6],
+        ];
+        drawtext(width / 7 + width / 14, 3 * height / 15 + 7*height / 90, res2txt);
+      }
+    }
+    
+    if(numcomm==0){
+      if(lvlLock==0){
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 1);
+      }
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau1)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau1)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    
 
     textAlign(CENTER);
     
-    //if(perdu>=2){
-    //  mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
-    //  mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
-    //  for (var i =commandes.length-1;i>=0;i--){
-    //    commandes.splice(i,1)
-    //    numcomm--
-    //  }
-    //  scor =0
-    //  cmpt = 0
-    //  myStorage.setItem(''+user, "");
-    //  myStorage.setItem(''+user, ""+highScore+","+floor(highScore/100));
-    //  perdu=0
-    //  mgr.showScene( test ); 
-    //}
+  }
+}
+      
+      
+function niveau2() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var numcomm = 0
+  var cmpt = 0
+  var perdu = 0
+  var ready = false
+  var lvlLock = ""
+  var highScore = ""
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 5; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+    }
+
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+
+    demande()
+    commandes[0].x = width / 2 - 3*height/15
+    commandes[0].y = height / 10
+    commandes[0].chiffre = 9
+    demande()
+    commandes[1].x = width / 2 - height/15
+    commandes[1].y = height / 10
+    commandes[1].chiffre = 8
+    demande()
+    commandes[2].x = width / 2 + height/15
+    commandes[2].y = height / 10
+    commandes[2].chiffre = 6
+    demande()
+    commandes[3].x = width / 2 + 3*height/15
+    commandes[3].y = height / 10
+    commandes[3].chiffre = 7
+    
+    var saveP = myStorage.getItem('' + user)
+    
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+    } else {
+      for (var i = 0; i < saveP.length; i++) {
+        if (saveP.charAt(i) == ',') {
+          ready = true
+        }
+        if (saveP.charAt(i) != ',' && ready) {
+          lvlLock += saveP.charAt(i)
+        }
+      }
+      ready = false
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    if(myStorage.getItem(''+user)==null){
+     highScore = 0
+    }else {
+     var saveP = myStorage.getItem(''+user)
+     for(var i = 0;i<saveP.length;i++){
+       if(saveP.charAt(i)!=','){
+         highScore += saveP.charAt(i)
+       }else{
+         break
+       }
+     }
+    }
+
+  }
+
+  function demande() {
+    commandes[numcomm] = new commande()
+    numcomm++
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          numcomm--
+          scor += com
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), "", calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    background(220);
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45 )
+    textAlign(CENTER)
+    
+    if(lvlLock>=5){
+      fill(255, 153, 51)
+      square(width / 2+width/7+width/15,height/2,width/15)
+    }
+    if(lvlLock>=10){
+      fill((102, 153, 153))
+      square(width / 2+width/7+2*width/15,height/2,width/15)
+    }
+    if(lvlLock>=20){
+      fill(255, 215, 0)
+      square(width / 2+width/7+3*width/15,height/2,width/15)
+    }
+    
+    if(numcomm==0){
+      
+      if(lvlLock<=1){
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 2);
+      }
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau2)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau2)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+  }
+}
+      
+function niveau3() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var numcomm = 0
+  var cmpt = 0
+  var perdu = 0
+  var ready = false
+  var lvlLock = ""
+  var highScore = ""
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 4; i < 9; i++) {
+      chiffres[i-4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+    }
+    calculators[0] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+
+    demande()
+    commandes[0].x = width / 2 - 3*height/15
+    commandes[0].y = height / 10
+    commandes[0].chiffre = 1
+    demande()
+    commandes[1].x = width / 2 - height/15
+    commandes[1].y = height / 10
+    commandes[1].chiffre = 2
+    demande()
+    commandes[2].x = width / 2 + height/15
+    commandes[2].y = height / 10
+    commandes[2].chiffre = 3
+    demande()
+    commandes[3].x = width / 2 + 3*height/15
+    commandes[3].y = height / 10
+    commandes[3].chiffre = 4
+    
+    var saveP = myStorage.getItem('' + user)
+    
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+    } else {
+      for (var i = 0; i < saveP.length; i++) {
+        if (saveP.charAt(i) == ',') {
+          ready = true
+        }
+        if (saveP.charAt(i) != ',' && ready) {
+          lvlLock += saveP.charAt(i)
+        }
+      }
+      ready = false
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    if(myStorage.getItem(''+user)==null){
+     highScore = 0
+    }else {
+     var saveP = myStorage.getItem(''+user)
+     for(var i = 0;i<saveP.length;i++){
+       if(saveP.charAt(i)!=','){
+         highScore += saveP.charAt(i)
+       }else{
+         break
+       }
+     }
+    }
+
+  }
+
+  function demande() {
+    commandes[numcomm] = new commande()
+    numcomm++
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          numcomm--
+          scor += com
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), "", calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    background(220);
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Un peu de soustraction", width / 7 + width / 14, 3 * height / 15 + height / 45 )
+    textAlign(CENTER)
+    
+    if(lvlLock>=5){
+      fill(255, 153, 51)
+      square(width / 2+width/7+width/15,height/2,width/15)
+    }
+    if(lvlLock>=10){
+      fill((102, 153, 153))
+      square(width / 2+width/7+2*width/15,height/2,width/15)
+    }
+    if(lvlLock>=20){
+      fill(255, 215, 0)
+      square(width / 2+width/7+3*width/15,height/2,width/15)
+    }
+    
+    if(numcomm==0){
+      
+      if(lvlLock<=2){
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 3);
+      }
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau3)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+  }
+}
+      
+function niveau4() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var numcomm = 0
+  var cmpt = 0
+  var perdu = 0
+  var ready = false
+  var lvlLock = ""
+  var highScore = ""
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+    }
+    calculators[0] = new calculator("x", 2*width / 5, 2*height / 3 + height / 15)
+
+    demande()
+    commandes[0].x = width / 2 - 3*height/15
+    commandes[0].y = height / 10
+    commandes[0].chiffre = 12
+    demande()
+    commandes[1].x = width / 2 - height/15
+    commandes[1].y = height / 10
+    commandes[1].chiffre = 21
+    demande()
+    commandes[2].x = width / 2 + height/15
+    commandes[2].y = height / 10
+    commandes[2].chiffre = 20
+    demande()
+    commandes[3].x = width / 2 + 3*height/15
+    commandes[3].y = height / 10
+    commandes[3].chiffre = 16
+    
+    var saveP = myStorage.getItem('' + user)
+    
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+    } else {
+      for (var i = 0; i < saveP.length; i++) {
+        if (saveP.charAt(i) == ',') {
+          ready = true
+        }
+        if (saveP.charAt(i) != ',' && ready) {
+          lvlLock += saveP.charAt(i)
+        }
+      }
+      ready = false
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    if(myStorage.getItem(''+user)==null){
+     highScore = 0
+    }else {
+     var saveP = myStorage.getItem(''+user)
+     for(var i = 0;i<saveP.length;i++){
+       if(saveP.charAt(i)!=','){
+         highScore += saveP.charAt(i)
+       }else{
+         break
+       }
+     }
+    }
+
+  }
+
+  function demande() {
+    commandes[numcomm] = new commande()
+    numcomm++
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          numcomm--
+          scor += com
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), "", calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    background(220);
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Dernier point, les multiplications", width / 7 + width / 14, 3 * height / 15 + height / 45 )
+    textAlign(CENTER)
+    
+    if(lvlLock>=5){
+      fill(255, 153, 51)
+      square(width / 2+width/7+width/15,height/2,width/15)
+    }
+    if(lvlLock>=10){
+      fill((102, 153, 153))
+      square(width / 2+width/7+2*width/15,height/2,width/15)
+    }
+    if(lvlLock>=20){
+      fill(255, 215, 0)
+      square(width / 2+width/7+3*width/15,height/2,width/15)
+    }
+    
+    if(numcomm==0){
+      
+      if(lvlLock<=3){
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 4);
+      }
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+  }
+}
+      
+function niveau5() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var numcomm = 0
+  var cmpt = 0
+  var perdu = 0
+  var ready = false
+  var lvlLock = ""
+  var highScore = ""
+  var dix = 0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
+    calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+    
+    var saveP = myStorage.getItem('' + user)
+    
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+    } else {
+      for (var i = 0; i < saveP.length; i++) {
+        if (saveP.charAt(i) == ',') {
+          ready = true
+        }
+        if (saveP.charAt(i) != ',' && ready) {
+          lvlLock += saveP.charAt(i)
+        }
+      }
+      ready = false
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    if(myStorage.getItem(''+user)==null){
+     highScore = 0
+    }else {
+     var saveP = myStorage.getItem(''+user)
+     for(var i = 0;i<saveP.length;i++){
+       if(saveP.charAt(i)!=','){
+         highScore += saveP.charAt(i)
+       }else{
+         break
+       }
+     }
+    }
+
+  }
+
+  function demande() {
+    commandes[numcomm] = new commande()
+    numcomm++
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          numcomm--
+          scor += com
+          dix++
+          if(cmpt<500){
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), "", calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    
+    if (cmpt % 700 == 0) {
+      demande()
+    }
+    cmpt++
+    background(220);
+    
+    
+
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+      if (commandes[i].update()) {
+        commandes.splice(i, 1)
+        numcomm--
+        perdu++
+      }
+    }
+    
+    
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Ok, maintenant le premier vrai défis, pourrez vous réaliser 10 commande ?", width / 7 + width / 14, 3 * height / 15 + height / 45 )
+    textAlign(CENTER)
+    
+    if(lvlLock>=5){
+      fill(255, 153, 51)
+      square(width / 2+width/7+width/15,height/2,width/15)
+    }
+    if(lvlLock>=10){
+      fill((102, 153, 153))
+      square(width / 2+width/7+2*width/15,height/2,width/15)
+    }
+    if(lvlLock>=20){
+      fill(255, 215, 0)
+      square(width / 2+width/7+3*width/15,height/2,width/15)
+    }
+    
+    if(dix==10){
+      
+      if(lvlLock<=4){
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 5);
+      }
+      scor=0
+      dix =0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      
+      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.showScene(yeahMedaille)
+    }
   }
 }

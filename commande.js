@@ -1,5 +1,5 @@
 function commande(){
-  this.chiffre=(Math.floor((Math.random() * 89) + 10))
+  this.chiffre=(Math.floor((Math.random() * 19) + 10))
   this.x=width/7+width/15;
   this.y=height/10;
   this.cote=height/15;
@@ -19,7 +19,7 @@ function commande(){
     if(this.x>=6*width/7-width/15){
       return true
     }
-    this.x+=width/2000
+    this.x+=width/3000
   }
   
   
