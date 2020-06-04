@@ -312,8 +312,25 @@ function sketch() {
   }
 
   function demande() {
-    commandes[numcomm] = new commande()
-    numcomm++
+    switch(floor(scor/100)){
+      case 0:
+        commandes[numcomm] = new commande(30,10)
+        numcomm++
+        break;
+      case 1:
+        commandes[numcomm] = new commande(60,10)
+        numcomm++
+        break;
+      case 2:
+        commandes[numcomm] = new commande(100,10)
+        numcomm++
+        break;
+      default:
+        commandes[numcomm] = new commande(100,10)
+        numcomm++
+        break;
+    }
+    
   }
 
   this.mousePressed = function() {
@@ -1454,7 +1471,7 @@ function niveau5() {
   }
 
   function demande() {
-    commandes[numcomm] = new commande()
+    commandes[numcomm] = new commande(30,10)
     numcomm++
   }
 
