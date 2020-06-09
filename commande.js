@@ -1,5 +1,5 @@
 function commande(max,min){
-  this.chiffre=(Math.floor((Math.random() * max-10) + min+10))
+  this.chiffre= Math.floor(Math.random() * (max - min + 1)) + min
   this.x=width/7+width/15;
   this.y=height/10;
   this.cote=height/15;
