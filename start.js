@@ -6,6 +6,9 @@ var cog
 var cogmenu
 var pause = false
 var scorg =""
+var table
+var chair
+var bar
 
 
 function drawtext(x, y, text_array) {
@@ -29,13 +32,28 @@ function drawtext(x, y, text_array) {
 
 function preload() {
   cog = loadImage('img/cog.png');
-
+  crate = loadImage('img/crate.png');
+  floork = loadImage('img/floor1.jpeg');
+  bar1 = loadImage('img/bar1.png');
+  bar2 = loadImage('img/bar2.png');
+  chaira = loadImage('img/chairw.png');
+  chairw = loadImage('img/chaira.png');
+  tablew = loadImage('img/tablew.png');
+  tablea = loadImage('img/tablea.png');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cog.resize(height / 15, height / 15)
+  crate.resize(height/15,height/15)
+  bar1.resize(width/2-height/15,height/5)
+  bar2.resize(width/2-height/15,height/5)
+  chairw.resize(height/5,height/5)
+  chaira.resize(height/7,height/7)
+  tablew.resize(height/7,height/7)
+  tablea.resize(height/7,height/7)
   cogmenu = new Clickable(width - 30 - height / 15, 10, cog);
+  floork.resize(9*width/20,9*height/15)
   cogmenu.onPress = function() {
     if (!pause) {
       pause = true
@@ -46,6 +64,175 @@ function setup() {
   mgr.showScene(menu);
 
 
+}
+
+function shop(){
+  var lvlLock
+  var highScore
+  
+  this.setup = function(){
+    
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+    console.log(saveP)
+    
+    
+    
+    bar1.resize(height/4,height/5)
+    bar2.resize(height/4,height/5)
+    chairw.resize(height/5,height/6)
+    chaira.resize(height/7,height/7)
+    tablew.resize(height/7,height/7)
+    tablea.resize(height/7,height/7)
+    
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      bar1.resize(width/2-height/15,height/5)
+      bar2.resize(width/2-height/15,height/5)
+      chairw.resize(height/5,height/5)
+      chaira.resize(height/7,height/7)
+      tablew.resize(height/7,height/7)
+      tablea.resize(height/7,height/7)
+      mgr.scenes[mgr.findSceneIndex(shop)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(shop)].enterExecuted = false
+      mgr.showScene(menuselection);
+      
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      pause =false
+      bar1.resize(width/2-height/15,height/5)
+      bar2.resize(width/2-height/15,height/5)
+      chairw.resize(height/5,height/5)
+      chaira.resize(height/7,height/7)
+      tablew.resize(height/7,height/7)
+      tablea.resize(height/7,height/7)
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.scenes[mgr.findSceneIndex(shop)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(shop)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    
+    createCanvas(windowWidth, windowHeight);
+    myBut1 = new Clickable(width/3+width/20,height/6);
+    myBut1.text = "acheter, 100 pièces"
+    myBut1.onPress = function() {
+      if(scorg>=100){
+        chair =1
+        scorg-=100
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+      }
+    }
+    myBut2 = new Clickable(width/3+width/20,2*height/6);
+    myBut2.text = "acheter, 500 pièces"
+    myBut2.onPress = function() {
+      if(scorg>=500){
+        chair =2
+        scorg-=500
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+      }
+    }
+    myBut3 = new Clickable(width/3+width/20,3*height/6);
+    myBut3.text = "acheter, 200 pièces"
+    myBut3.onPress = function() {
+      if(scorg>=200){
+        table =1
+        scorg-=200
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+      }
+    }
+    myBut4 = new Clickable(width/3+width/20,4*height/6);
+    myBut4.text = "acheter, 1000 pièces"
+    myBut4.onPress = function() {
+      if(scorg>=1000){
+        table =2
+        scorg-=1000
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+      }
+    }    
+    myBut5 = new Clickable(2*width/3+width/20,height/6);
+    myBut5.text = "acheter, 2000 pièces"
+    myBut5.onPress = function() {
+      if(scorg>=2000){
+        bar =1
+        scorg-=2000
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+      }
+    }
+    myBut6 = new Clickable(2*width/3+width/20,3*height/6);
+    myBut6.text = "acheter, 3000 pièces"
+    myBut6.onPress = function() {
+      if(scorg>=3000){
+        bar =2
+        scorg-=3000
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+      }
+    }
+  }
+  
+  this.draw = function(){
+    background(220)
+    cogmenu.draw()
+    text("Pièces: "+scorg,width/30,29*height/30)
+    image(chairw, width/3-width/20, 1*height/6);
+    image(chaira, width/3-width/20, 2*height/6);
+    image(tablew, width/3-width/20, 3*height/6);
+    image(tablea, width/3-width/20, 4*height/6);
+    image(bar1, 2*width/3-width/20, 1*height/6);
+    image(bar2, 2*width/3-width/20, 3*height/6);
+    if(chair!=1){
+       myBut1.draw()
+    }
+    if(chair!=2){
+       myBut2.draw()
+    }
+    if(table!=1){
+       myBut3.draw()
+    }
+    if(table!=2){
+       myBut4.draw()
+    }
+    if(bar!=1){
+       myBut5.draw()
+    }
+    if(bar!=2){
+       myBut6.draw()
+    }
+    
+    if(pause){
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
 }
 
 function test() {
@@ -120,10 +307,17 @@ function yeahMedaille() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
 
@@ -166,12 +360,19 @@ function menuselection() {
 
     var saveP = myStorage.getItem('' + user)
     if (myStorage.getItem('' + user) == null) {
-      var lvlLock = 0
+      lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
     var x = width / 6
     var y = height / 6
@@ -257,14 +458,23 @@ function menuselection() {
       mgr.showScene(sketch);
     }
     ///
+    ///shop
+    myButtonsho = new Clickable();
+    myButtonsho.text = "mode infini"
+    myButtonsho.locate(3*width / 4 - myButtonsho.width / 2, 5 * height / 6);
+    myButtonsho.onPress = function() {
+
+      mgr.showScene(shop);
+    }
+    ///
 
   }
 
   this.draw = function() {
     background(220);
     myButtonin.draw()
-    cogmenu.draw()
-    text("Score global: "+scorg,width/30,29*height/30)
+    myButtonsho.draw()
+    text("Pièces: "+scorg,width/30,29*height/30)
 
     for (var i = 0; i < bouts.length; i++) {
       bouts[i].draw()
@@ -281,6 +491,7 @@ function menu() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     nom = createInput()
+    user =""
     nom.position(width / 2 - nom.width / 2, 4 * height / 10)
     myButton1 = new Clickable();
     myButton1.text = "valider"
@@ -292,6 +503,7 @@ function menu() {
         return
       }
       nom.position(-1000, -1000)
+      
       mgr.showScene(menuselection);
     }
 
@@ -326,38 +538,49 @@ function sketch() {
   var perdu = 0
   var highScore = ""
   var lvlLock = ""
+  
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     var saveP = myStorage.getItem('' + user)
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
       highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
     
-    
+
     
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
+      pause = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
+      pause = false
       nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
 
 
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
 
     /// création des calculator
@@ -369,8 +592,7 @@ function sketch() {
 
     ///zone de dépot des commandes
     dep = new depot()
-    
-    
+    console.log(chair)
     
 
   }
@@ -451,19 +673,98 @@ function sketch() {
     if (scor > highScore) {
       highScore = scor
     }
-    cogmenu.draw()
+    
     if (cmpt % 700 == 0) {
       demande()
       cmpt=0
     }
     background(220);
     cogmenu.draw()
-
-
-
-
+    image(floork, width/20, height/3);
+    imageMode(CENTER)
     dep.display()
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
 
+    imageMode(CORNER)
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
       chiffres[i].display()
@@ -535,7 +836,7 @@ function sketch() {
       var bb = gscor+scor
       cmpt = 0
       myStorage.setItem('' + user, "");
-      myStorage.setItem('' + user, "" + highScore + "," + Math.max(floor(highScore / 100), lvlLock)+","+bb);
+      myStorage.setItem('' + user, "" + highScore + "," + Math.max(floor(highScore / 100), lvlLock)+","+bb+","+chair+","+table+","+bar);
       perdu = 0
       scor = 0
       mgr.showScene(test);
@@ -576,7 +877,7 @@ function niveau1() {
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
-    chiffres[0] = new chiffre(6, width / 20, height / 2)
+    chiffres[0] = new chiffre(6, width / 20, height / 2,crate)
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
@@ -598,6 +899,8 @@ function niveau1() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau1)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau1)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
@@ -611,10 +914,17 @@ function niveau1() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -679,11 +989,95 @@ function niveau1() {
 
   this.draw = function() {
     background(220);
+    image(floork, width/20, height/3);
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
     }
     cogmenu.draw()
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -809,11 +1203,11 @@ function niveau1() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 1+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 1+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -856,7 +1250,7 @@ function niveau2() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 5; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -879,6 +1273,8 @@ function niveau2() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau2)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau2)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
@@ -904,10 +1300,17 @@ function niveau2() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -971,12 +1374,96 @@ function niveau2() {
 
   this.draw = function() {
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1047,11 +1534,11 @@ function niveau2() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 2+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 2+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -1088,7 +1575,7 @@ function niveau3() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 4; i < 9; i++) {
-      chiffres[i - 4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i - 4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     calculators[0] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
 
@@ -1113,6 +1600,8 @@ function niveau3() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau3)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -1137,10 +1626,17 @@ function niveau3() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -1204,12 +1700,96 @@ function niveau3() {
 
   this.draw = function() {
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1280,11 +1860,11 @@ function niveau3() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 3+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 3+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -1320,7 +1900,7 @@ function niveau4() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     calculators[0] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
@@ -1345,6 +1925,8 @@ function niveau4() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -1369,10 +1951,17 @@ function niveau4() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -1436,12 +2025,96 @@ function niveau4() {
 
   this.draw = function() {
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1512,11 +2185,11 @@ function niveau4() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 4+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 4+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -1553,7 +2226,7 @@ function niveau5() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     
     lvlselect = new Clickable();
@@ -1579,6 +2252,8 @@ function niveau5() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -1590,12 +2265,18 @@ function niveau5() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
-
     ///zone de dépot des commandes
     dep = new depot()
 
@@ -1666,6 +2347,7 @@ function niveau5() {
       cmpt=0
     }
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -1673,6 +2355,89 @@ function niveau5() {
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1746,11 +2511,11 @@ function niveau5() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 5+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 5+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       scor = 0
       dix = 0
@@ -1799,7 +2564,7 @@ function niveau6() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     
     lvlselect = new Clickable();
@@ -1825,6 +2590,8 @@ function niveau6() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -1836,10 +2603,17 @@ function niveau6() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -1912,6 +2686,7 @@ function niveau6() {
       cmpt=0
     }
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -1919,6 +2694,89 @@ function niveau6() {
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1985,11 +2843,11 @@ function niveau6() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 6+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 6+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       scor = 0
       dix = 0
@@ -2038,7 +2896,7 @@ function niveau7() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     
     lvlselect = new Clickable();
@@ -2064,6 +2922,8 @@ function niveau7() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -2075,10 +2935,17 @@ function niveau7() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -2151,6 +3018,7 @@ function niveau7() {
       cmpt=0
     }
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -2158,6 +3026,89 @@ function niveau7() {
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2224,11 +3175,11 @@ function niveau7() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 7+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 7+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       scor = 0
       dix = 0
@@ -2277,7 +3228,7 @@ function niveau8() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     
     lvlselect = new Clickable();
@@ -2303,6 +3254,8 @@ function niveau8() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -2314,10 +3267,17 @@ function niveau8() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -2390,6 +3350,7 @@ function niveau8() {
       cmpt=0
     }
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -2397,6 +3358,89 @@ function niveau8() {
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2463,11 +3507,11 @@ function niveau8() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 8+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 8+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       scor = 0
       dix = 0
@@ -2516,7 +3560,7 @@ function niveau9() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     
     lvlselect = new Clickable();
@@ -2542,6 +3586,8 @@ function niveau9() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -2553,10 +3599,17 @@ function niveau9() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -2629,6 +3682,7 @@ function niveau9() {
       cmpt=0
     }
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -2636,6 +3690,89 @@ function niveau9() {
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2702,11 +3839,11 @@ function niveau9() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 9+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 9+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       scor = 0
       dix = 0
@@ -2755,7 +3892,7 @@ function niveau10() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
     
     lvlselect = new Clickable();
@@ -2781,6 +3918,8 @@ function niveau10() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -2792,10 +3931,17 @@ function niveau10() {
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
       scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
     }else{
       var tab = saveP.split(',')
+      highScore = tab[0]
       lvlLock=tab[1]
       scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
@@ -2867,6 +4013,7 @@ function niveau10() {
       demande()
     }
     background(220);
+    image(floork, width/20, height/3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -2874,6 +4021,89 @@ function niveau10() {
     }
 
     dep.display()
+    imageMode(CENTER)
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2940,11 +4170,11 @@ function niveau10() {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 10+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + 10+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
       }
       scor = 0
       dix = 0
