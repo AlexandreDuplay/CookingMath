@@ -268,9 +268,9 @@ function yeah() {
     myBut.onPress = function() {
       mgr.showScene(menuselection);
     }
-    myBut2 = new Clickable();
-    myBut2.locate(2 * width / 3 - myBut2.width / 2, 2 * height / 3);
-    myBut2.onPress = function() {
+    myButm = new Clickable();
+    myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
+    myButm.onPress = function() {
       nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       mgr.showScene(menu);
     }
@@ -284,7 +284,7 @@ function yeah() {
     textSize(height / 20)
     text("menu de sélection", width / 3, height / 2)
     text("menu principal", 2 * width / 3, height / 2)
-    myBut2.draw()
+    myButm.draw()
   }
 }
 
@@ -297,9 +297,9 @@ function yeahMedaille() {
     myBut.onPress = function() {
       mgr.showScene(menuselection);
     }
-    myBut2 = new Clickable();
-    myBut2.locate(2 * width / 3 - myBut2.width / 2, 2 * height / 3);
-    myBut2.onPress = function() {
+    myButm = new Clickable();
+    myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
+    myButm.onPress = function() {
       nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       mgr.showScene(menu);
     }
@@ -331,7 +331,7 @@ function yeahMedaille() {
     textSize(height / 20)
     text("menu de sélection", width / 3, height / 2)
     text("menu principal", 2 * width / 3, height / 2)
-    myBut2.draw()
+    myButm.draw()
     textSize(height / 30)
     fill(0)
     text("Vous avez débloqué une nouvelle médaille des 'chefs des maths'", width / 2, 3 * height / 4 + height / 10)
@@ -1129,15 +1129,15 @@ function niveau1() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     textAlign(LEFT)
@@ -1517,15 +1517,15 @@ function niveau2() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (commandes.length == 0) {
@@ -1843,15 +1843,15 @@ function niveau3() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (commandes.length == 0) {
@@ -2168,15 +2168,15 @@ function niveau4() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (commandes.length == 0) {
@@ -2494,15 +2494,15 @@ function niveau5() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (dix == 10) {
@@ -2826,15 +2826,15 @@ function niveau6() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (dix == 10) {
@@ -3158,15 +3158,15 @@ function niveau7() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (dix == 10) {
@@ -3490,15 +3490,15 @@ function niveau8() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (dix == 10) {
@@ -3822,15 +3822,15 @@ function niveau9() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (dix == 10) {
@@ -4153,15 +4153,15 @@ function niveau10() {
 
     if (lvlLock >= 5) {
       fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 10) {
       fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
     }
     if (lvlLock >= 20) {
       fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 2, width / 15)
+      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
     }
 
     if (dix == 10) {
