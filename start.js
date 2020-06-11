@@ -30,6 +30,93 @@ function drawtext(x, y, text_array) {
   }
 }
 
+function meubles(){
+  imageMode(CENTER)
+    dep.display()
+    if(chair==1){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chairw,0,-height/16)
+	  rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      rotate(radians(90));
+      image(chairw,0,-height/16)
+      pop();
+    }
+    if(chair==2){
+      push();
+      translate(width/2+width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+width/4,height/2+5*height/15)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+      push();
+      translate(width/2+3*width/8,height/2+height/7)
+      image(chaira,0,-height/16)
+	  rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      rotate(radians(90));
+      image(chaira,0,-height/16)
+      pop();
+    }
+    if(table==1){
+      image(tablew,width/2+width/8,height/2+height/7)
+      image(tablew,width/2+width/4,height/2+5*height/15)
+      image(tablew,width/2+3*width/8,height/2+height/7)
+    }
+    if(table==2){
+      image(tablea,width/2+width/8,height/2+height/7)
+      image(tablea,width/2+width/4,height/2+5*height/15)
+      image(tablea,width/2+3*width/8,height/2+height/7)
+    }
+    if(bar == 1){
+      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
+    }   
+    if(bar == 2){
+      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
+    }
+
+    imageMode(CORNER)
+}
+
 function preload() {
   cog = loadImage('img/cog.png');
   crate = loadImage('img/crate.png');
@@ -40,6 +127,9 @@ function preload() {
   chairw = loadImage('img/chaira.png');
   tablew = loadImage('img/tablew.png');
   tablea = loadImage('img/tablea.png');
+  bronze = loadImage('img/bronze.png');
+  silver = loadImage('img/silver.png');
+  gold = loadImage('img/gold.png'); 
 }
 
 function setup() {
@@ -52,6 +142,9 @@ function setup() {
   chaira.resize(height/7,height/7)
   tablew.resize(height/7,height/7)
   tablea.resize(height/7,height/7)
+  bronze.resize(width/15,width/15)
+  silver.resize(width/15,width/15)
+  gold.resize(width/15,width/15)
   cogmenu = new Clickable(width - 30 - height / 15, 10, cog);
   floork.resize(9*width/20,9*height/15)
   cogmenu.onPress = function() {
@@ -336,16 +429,13 @@ function yeahMedaille() {
     fill(0)
     text("Vous avez débloqué une nouvelle médaille des 'chefs des maths'", width / 2, 3 * height / 4 + height / 10)
     if (lvlLock >= 4 && lvlLock < 9) {
-      fill(255, 153, 51)
-      square(width / 2 - height / 30, 3 * height / 4-width/15, width / 15)
+      image(bronze,width / 2 - height / 30, 3 * height / 4-width/15)
     }
     else if (lvlLock >= 9 && lvlLock < 19 ) {
-      fill((102, 153, 153))
-      square(width / 2 - height / 30, 3 * height / 4-width/15, width / 15)
+      image(silver,width / 2 - height / 30, 3 * height / 4-width/15)
     }
     else if (lvlLock >= 19) {
-      fill(255, 215, 0)
-      square(width / 2 - height / 30, 3 * height / 4-width/15, width / 15)
+      image(gold,width / 2 - height / 30, 3 * height / 4-width/15)
     }
   }
 }
@@ -440,6 +530,56 @@ function menuselection() {
           case 9:
             bouts[i].onPress = function() {
               mgr.showScene(niveau10);
+            }
+            break;
+          case 10:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau11);
+            }
+            break;
+          case 11:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau12);
+            }
+            break;
+          case 12:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau13);
+            }
+            break;
+          case 13:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau14);
+            }
+            break;
+          case 14:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau15);
+            }
+            break;
+          case 15:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau16);
+            }
+            break;
+          case 16:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau17);
+            }
+            break;
+          case 17:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau18);
+            }
+            break;
+          case 18:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau19);
+            }
+            break;
+          case 19:
+            bouts[i].onPress = function() {
+              mgr.showScene(niveau20);
             }
             break;
         }
@@ -565,6 +705,8 @@ function sketch() {
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
+      mgr.scenes[mgr.findSceneIndex(sketch)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(sketch)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -681,90 +823,8 @@ function sketch() {
     background(220);
     cogmenu.draw()
     image(floork, width/20, height/3);
-    imageMode(CENTER)
-    dep.display()
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
+    
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
       chiffres[i].display()
@@ -811,16 +871,13 @@ function sketch() {
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     for(var i = 0 ; i<perdu;i++){
@@ -995,89 +1052,7 @@ function niveau1() {
     }
     cogmenu.draw()
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1128,22 +1103,19 @@ function niveau1() {
     ellipse(width / 2 + height / 30, height / 10 + height / 30, height / 11, height / 11)
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     textAlign(LEFT)
     var col1 = [0, 0, 0];
     var col2 = [250, 220, 140];
-    var col3 = [200, 100, 100];
+    var col3 = [200, 150, 100];
     var col4 = [100, 100, 200];
     var col5 = [100, 200, 100];
     var col6 = [255, 255, 0];
@@ -1319,7 +1291,7 @@ function niveau2() {
   }
 
   function demande() {
-    commandes[commandes.length] = new commande()
+    commandes[commandes.length] = new commande(18,10)
   }
 
   this.mousePressed = function() {
@@ -1373,6 +1345,7 @@ function niveau2() {
   }
 
   this.draw = function() {
+    
     background(220);
     image(floork, width/20, height/3);
     cogmenu.draw()
@@ -1381,89 +1354,7 @@ function niveau2() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1516,16 +1407,13 @@ function niveau2() {
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (commandes.length == 0) {
@@ -1547,16 +1435,17 @@ function niveau2() {
       mgr.scenes[mgr.findSceneIndex(niveau2)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
     if(pause){
       fill(255)
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
     }
+    
+    
   }
 }
-
+      
 function niveau3() {
   var chiffres = []
   var calculators = []
@@ -1571,14 +1460,13 @@ function niveau3() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
+  var dix=0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
-    for (var i = 4; i < 9; i++) {
-      chiffres[i - 4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
     }
-    calculators[0] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
-
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
@@ -1600,6 +1488,255 @@ function niveau3() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau3)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(18,10)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 2) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 3+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau3)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+
+function niveau4() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix =0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 4; i < 9; i++) {
+      chiffres[i - 4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    calculators[0] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
+
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -1658,6 +1795,10 @@ function niveau3() {
         if (resboo && selecte == com) {
           commandes.splice(i, 1)
           scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
         }
       }
     }
@@ -1707,89 +1848,7 @@ function niveau3() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1842,25 +1901,22 @@ function niveau3() {
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (commandes.length == 0) {
 
-      if (lvlLock <= 2) {
+      if (lvlLock <= 3) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 3+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 4+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -1869,8 +1925,8 @@ function niveau3() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau3)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
       mgr.showScene(yeah)
     }
     if(pause){
@@ -1881,8 +1937,8 @@ function niveau3() {
     }
   }
 }
-
-function niveau4() {
+      
+function niveau5() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -1896,6 +1952,257 @@ function niveau4() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("-", width / 5, height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(8,0)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 4) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 5+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.showScene(yeahMedaille)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+
+function niveau6() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
@@ -1911,8 +2218,8 @@ function niveau4() {
       pause = false
       commandes = []
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -1923,8 +2230,8 @@ function niveau4() {
       pause = false
       commandes = []
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -1983,6 +2290,10 @@ function niveau4() {
         if (resboo && selecte == com) {
           commandes.splice(i, 1)
           scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
         }
       }
     }
@@ -2032,89 +2343,7 @@ function niveau4() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2140,7 +2369,11 @@ function niveau4() {
     /// score test 
     textSize(height / 30);
     text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
-
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
 
 
     stroke(0)
@@ -2167,25 +2400,22 @@ function niveau4() {
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (commandes.length == 0) {
 
-      if (lvlLock <= 3) {
+      if (lvlLock <= 5) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 4+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 6+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -2194,8 +2424,8 @@ function niveau4() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
       mgr.showScene(yeah)
     }
     if(pause){
@@ -2206,8 +2436,2036 @@ function niveau4() {
     }
   }
 }
+      
+function niveau7() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
 
-function niveau5() {
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2)*(Math.floor(Math.random() * (5 - 2 + 1)) + 2))
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 6) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 7+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau8() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    //calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 -0 + 1)) - 0)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 7) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 8+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau9() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    //calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 -1 + 1)) + 1)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 8) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 9+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau10() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    //calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    calculators[0] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 9) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 10+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.showScene(yeahMedaile)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau11() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau11)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau11)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau11)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau11)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    //calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    calculators[0] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)-1
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 10) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 11+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau11)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau11)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau12() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau12)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau12)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau12)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau12)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 +1 + 1)) - 1)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    if (dix == 10) {
+
+      if (lvlLock <= 11) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 12+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau12)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau12)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau13() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau13)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau13)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau13)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau13)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 +2 + 1)) - 2)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 12) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 13+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau13)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau13)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+      
+function niveau14() {
+  var chiffres = []
+  var calculators = []
+  var selecte = 0
+  var results = []
+  var res = 0
+  var resboo = false
+  var resref = 0
+  var scor = 0
+  var commandes = []
+  var cmpt = 0
+  var perdu = 0
+  var lvlLock = ""
+  var highScore = ""
+  var dix=0
+
+  this.setup = function() {
+    createCanvas(windowWidth, windowHeight);
+    for (var i = 0; i < 9; i++) {
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+    }
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau14)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau14)].enterExecuted = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      pause = false
+      commandes = []
+      scor = 0
+      mgr.scenes[mgr.findSceneIndex(niveau14)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau14)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
+    calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
+
+    var saveP = myStorage.getItem('' + user)
+    if (myStorage.getItem('' + user) == null) {
+      lvlLock = 0
+      scorg = 0
+      chair = 0
+      table = 0
+      bar = 0
+    }else{
+      var tab = saveP.split(',')
+      highScore = tab[0]
+      lvlLock=tab[1]
+      scorg=tab[2]
+      chair = tab[3] || 0
+      table = tab[4] ||0
+      bar = tab[5] || 0
+    }
+
+    ///zone de dépot des commandes
+    dep = new depot()
+    
+  }
+
+  function demande() {
+    commandes[commandes.length] = new commande(1,0)
+    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 +3 + 1)) - 3)
+  }
+
+  this.mousePressed = function() {
+    if (dep.clicked()) {
+      results.splice(resref, 1)
+      res--
+      resref = 0
+      for (var i = 0; i < commandes.length; i++) {
+        var com = commandes[i].chiffre
+        if (resboo && selecte == com) {
+          commandes.splice(i, 1)
+          scor += com
+          dix++
+          if (cmpt < 500) {
+            cmpt = -50
+          }
+        }
+      }
+    }
+
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        if (calculators[i].updigit(selecte)) {
+          if (resboo) {
+            results.splice(resref, 1)
+            res--
+            resref = 0
+          }
+        }
+        if (calculators[i].a != 0 && calculators[i].b != 0) {
+          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          res++
+        }
+      }
+    }
+    for (var i = 0; i < chiffres.length; i++) {
+      selecte = chiffres[i].clicked()
+      resboo = false
+      if (selecte != 0) {
+        break
+      }
+    }
+    for (var i = 0; i < results.length; i++) {
+      if (selecte != 0) {
+        break
+      }
+      selecte = results[i].clicked()
+      resboo = true
+      resref = i
+      if (selecte != 0) {
+        break
+      }
+    }
+  }
+
+  this.draw = function() {
+    if (cmpt % 700 == 0) {
+      demande()
+      if(cmpt!=0){
+        cmpt =0   
+      }
+    }
+    background(220);
+    image(floork, width/20, height/3);
+    cogmenu.draw()
+    for (var i = 0; i < commandes.length; i++) {
+      commandes[i].display()
+    }
+
+    dep.display()
+    meubles()
+
+    ///affichage des chiffres (ingrédients)
+    for (var i = 0; i < chiffres.length; i++) {
+      chiffres[i].display()
+    }
+
+    ///affichages des machines à calculer 
+    for (var i = 0; i < calculators.length; i++) {
+      calculators[i].display()
+    }
+
+    ///affichages des resultats des machines à calculer 
+    for (var i = 0; i < results.length; i++) {
+      results[i].display()
+    }
+
+    ///affichage du chiffre selectioné
+    textSize(height / 30);
+    text("selection : " + selecte, width / 18, height / 15)
+    ///
+
+
+    /// score test 
+    textSize(height / 30);
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
+    /// nb commandes réussites
+    textSize(height / 45);
+    textAlign(LEFT)
+    text("commandes réussites : " + dix, 10, height / 15 + 3 * height / 20)
+    textAlign(CENTER)
+
+
+    stroke(0)
+    line(width / 2 + width / 15, height / 3, width / 2 + width / 15, height)
+    line(width / 20, height / 3, width, height / 3)
+    line(width / 20, height / 3, width / 20, 14 * height / 15)
+    line(width / 7, 0, width / 7, height / 3)
+    line(width / 20, 14 * height / 15, width / 2, 14 * height / 15)
+    fill(200, 200, 200)
+
+    ///ligne à commandes
+    ellipse(width / 7 + width / 15, height / 15, height / 15, height / 15)
+    ellipse(6 * width / 7 - width / 15, height / 15, height / 15, height / 15)
+    line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
+    line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
+
+    stroke(0);
+    fill(255);
+    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
+    textSize(width / 100)
+    fill(0)
+    textAlign(LEFT)
+    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    textAlign(CENTER)
+
+    if (lvlLock >= 5) {
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 10) {
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+    }
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+    }
+    
+    if (dix == 10) {
+
+      if (lvlLock <= 13) {
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + 14+","+gscor+","+chair+","+table+","+bar);
+      }else{
+        var gscor = parseInt(scorg)
+        gscor+=scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+      }
+      scor = 0
+      dix = 0
+      cmpt = 0
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+
+      mgr.scenes[mgr.findSceneIndex(niveau14)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau14)].enterExecuted = false
+      mgr.showScene(yeah)
+    }
+    
+    if (!pause) {
+      cmpt++
+      for (var i = 0; i < commandes.length; i++) {
+        commandes[i].display()
+        if (commandes[i].update()) {
+          commandes.splice(i, 1)
+          perdu++
+        }
+      }
+    } else {
+      fill(255)
+      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      lvlselect.draw()
+      peopleselect.draw()
+    }
+  }
+}
+
+function niveau15() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -2237,8 +4495,8 @@ function niveau5() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau15)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau15)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -2250,8 +4508,8 @@ function niveau5() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau15)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau15)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -2355,89 +4613,7 @@ function niveau5() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2493,25 +4669,22 @@ function niveau5() {
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (dix == 10) {
 
-      if (lvlLock <= 4) {
+      if (lvlLock <= 14) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 5+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 15+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -2523,8 +4696,8 @@ function niveau5() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
 
-      mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau15)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau15)].enterExecuted = false
       mgr.showScene(yeahMedaille)
     }
     if (!pause) {
@@ -2545,7 +4718,7 @@ function niveau5() {
   }
 }
       
-function niveau6() {
+function niveau16() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -2575,8 +4748,8 @@ function niveau6() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau16)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau16)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -2588,8 +4761,8 @@ function niveau6() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau16)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau16)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -2694,89 +4867,7 @@ function niveau6() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -2825,25 +4916,22 @@ function niveau6() {
     
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (dix == 10) {
 
-      if (lvlLock <= 5) {
+      if (lvlLock <= 15) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 6+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 16+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -2855,8 +4943,8 @@ function niveau6() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
 
-      mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau16)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau16)].enterExecuted = false
       mgr.showScene(yeah)
     }
     if (!pause) {
@@ -2877,7 +4965,7 @@ function niveau6() {
   }
 }
       
-function niveau7() {
+function niveau17() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -2907,8 +4995,8 @@ function niveau7() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau17)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau17)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -2920,8 +5008,8 @@ function niveau7() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau17)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau17)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -3026,89 +5114,7 @@ function niveau7() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -3157,25 +5163,22 @@ function niveau7() {
     
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (dix == 10) {
 
-      if (lvlLock <= 6) {
+      if (lvlLock <= 16) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 7+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 17+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -3187,8 +5190,8 @@ function niveau7() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
 
-      mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau17)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau17)].enterExecuted = false
       mgr.showScene(yeah)
     }
     if (!pause) {
@@ -3209,7 +5212,7 @@ function niveau7() {
   }
 }
       
-function niveau8() {
+function niveau18() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -3239,8 +5242,8 @@ function niveau8() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau18)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau18)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -3252,8 +5255,8 @@ function niveau8() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau18)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau18)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -3358,89 +5361,7 @@ function niveau8() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -3489,25 +5410,22 @@ function niveau8() {
     
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (dix == 10) {
 
-      if (lvlLock <= 7) {
+      if (lvlLock <= 17) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 8+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 18+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -3519,8 +5437,8 @@ function niveau8() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
 
-      mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau18)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau18)].enterExecuted = false
       mgr.showScene(yeah)
     }
     if (!pause) {
@@ -3541,7 +5459,7 @@ function niveau8() {
   }
 }
       
-function niveau9() {
+function niveau19() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -3571,8 +5489,8 @@ function niveau9() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau19)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau19)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -3584,8 +5502,8 @@ function niveau9() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau19)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau19)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -3690,89 +5608,7 @@ function niveau9() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -3821,25 +5657,22 @@ function niveau9() {
     
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (dix == 10) {
 
-      if (lvlLock <= 8) {
+      if (lvlLock <= 18) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 9+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 19+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -3851,8 +5684,8 @@ function niveau9() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
 
-      mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau19)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau19)].enterExecuted = false
       mgr.showScene(yeah)
     }
     if (!pause) {
@@ -3873,7 +5706,7 @@ function niveau9() {
   }
 }
       
-function niveau10() {
+function niveau20() {
   var chiffres = []
   var calculators = []
   var selecte = 0
@@ -3903,8 +5736,8 @@ function niveau10() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
@@ -3916,8 +5749,8 @@ function niveau10() {
       commandes = []
       dix=0
       scor = 0
-      mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -4021,89 +5854,7 @@ function niveau10() {
     }
 
     dep.display()
-    imageMode(CENTER)
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
-
-    imageMode(CORNER)
+    meubles()
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -4152,25 +5903,22 @@ function niveau10() {
     
 
     if (lvlLock >= 5) {
-      fill(255, 153, 51)
-      square(width / 2 + width / 7 + width / 15, height / 4-height/15, width / 15)
+      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
     }
     if (lvlLock >= 10) {
-      fill((102, 153, 153))
-      square(width / 2 + width / 7 + 2 * width / 15, height / 4-height/15, width / 15)
+      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
     }
-    if (lvlLock >= 20) {
-      fill(255, 215, 0)
-      square(width / 2 + width / 7 + 3 * width / 15, height / 4-height/15, width / 15)
+    if (lvlLock >= 15) {
+      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
     }
 
     if (dix == 10) {
 
-      if (lvlLock <= 9) {
+      if (lvlLock <= 19) {
         var gscor = parseInt(scorg)
         gscor+=scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 10+","+gscor+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + 19+","+gscor+","+chair+","+table+","+bar);
       }else{
         var gscor = parseInt(scorg)
         gscor+=scor
@@ -4182,9 +5930,9 @@ function niveau10() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
 
-      mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
-      mgr.showScene(yeahMedaille)
+      mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
+      mgr.showScene(yeah)
     }
     if (!pause) {
       cmpt++

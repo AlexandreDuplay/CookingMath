@@ -12,7 +12,7 @@ function chiffre(num,x_,y_,img_){
   
   this.display = function(){
     stroke(255);
-    fill(200,100,100);
+    fill(0,0,0);
     //square(this.x,this.y, this.cote);
     image(this.img, this.x, this.y, this.width, this.height);
 
