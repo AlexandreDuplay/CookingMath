@@ -600,7 +600,7 @@ function menuselection() {
     ///
     ///shop
     myButtonsho = new Clickable();
-    myButtonsho.text = "mode infini"
+    myButtonsho.text = "magasin"
     myButtonsho.locate(3*width / 4 - myButtonsho.width / 2, 5 * height / 6);
     myButtonsho.onPress = function() {
 
