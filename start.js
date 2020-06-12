@@ -1960,7 +1960,7 @@ function niveau4() {
     }
     if(selecte!=0){
       textSize(width/30)
-      fill(0)
+      fill(01)
       text(""+selecte,mouseX,mouseY)
     }
   }
