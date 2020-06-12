@@ -600,7 +600,7 @@ function menuselection() {
     ///
     ///shop
     myButtonsho = new Clickable();
-    myButtonsho.text = "mode infini"
+    myButtonsho.text = "magasin"
     myButtonsho.locate(3*width / 4 - myButtonsho.width / 2, 5 * height / 6);
     myButtonsho.onPress = function() {
 
@@ -768,7 +768,7 @@ function sketch() {
         if (resboo && selecte == com) {
           commandes.splice(i, 1)
           scor += com
-          if (cmpt < 500) {
+          if (cmpt < 500 && commandes.length < 1) {
             cmpt = 0
           }
         }
@@ -816,6 +816,7 @@ function sketch() {
       highScore = scor
     }
     
+    
     if (cmpt % 700 == 0) {
       demande()
       cmpt=0
@@ -824,6 +825,7 @@ function sketch() {
     cogmenu.draw()
     image(floork, width/20, height/3);
     meubles()
+    
     
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -913,6 +915,12 @@ function sketch() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -1199,6 +1207,11 @@ function niveau1() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
 
   }
 }
@@ -1441,7 +1454,11 @@ function niveau2() {
       lvlselect.draw()
       peopleselect.draw()
     }
-    
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
     
   }
 }
@@ -1690,6 +1707,12 @@ function niveau3() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
 
@@ -1934,6 +1957,11 @@ function niveau4() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -2185,6 +2213,11 @@ function niveau5() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
 
@@ -2433,6 +2466,11 @@ function niveau6() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -2685,6 +2723,11 @@ function niveau7() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -2940,6 +2983,11 @@ function niveau8() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -3193,6 +3241,11 @@ function niveau9() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -3448,6 +3501,16 @@ function niveau10() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -3702,6 +3765,11 @@ function niveau11() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -3954,6 +4022,11 @@ function niveau12() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -4209,6 +4282,11 @@ function niveau13() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -4461,6 +4539,11 @@ function niveau14() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -4715,6 +4798,11 @@ function niveau15() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -4961,6 +5049,11 @@ function niveau16() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -5209,6 +5302,11 @@ function niveau17() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -5455,6 +5553,11 @@ function niveau18() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
@@ -5703,6 +5806,11 @@ function niveau19() {
       lvlselect.draw()
       peopleselect.draw()
     }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }
   }
 }
       
@@ -5948,6 +6056,11 @@ function niveau20() {
       rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
     }
   }
 }
