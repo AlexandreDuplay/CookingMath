@@ -9,7 +9,7 @@ var scorg =""
 var table
 var chair
 var bar
-//myStorage.clear()
+
 
 function drawtext(x, y, text_array) {
 
@@ -154,9 +154,6 @@ function setup() {
       pause = false
     }
   }
-  for(var i =0; i<myStorage.length;i++){
-    console.log(myStorage.key(i))
-  }
   mgr.showScene(menu);
 
 
@@ -207,6 +204,8 @@ function shop(){
       tablea.resize(height/7,height/7)
       mgr.scenes[mgr.findSceneIndex(shop)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(shop)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menuselection);
       
     }
@@ -221,11 +220,10 @@ function shop(){
       chaira.resize(height/7,height/7)
       tablew.resize(height/7,height/7)
       tablea.resize(height/7,height/7)
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       mgr.scenes[mgr.findSceneIndex(shop)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(shop)].enterExecuted = false
-      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
-      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.showScene(menu);
     }
     
@@ -322,8 +320,11 @@ function shop(){
     }
     
     if(pause){
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -341,6 +342,8 @@ function test() {
     myBut.text = "menu de sélection"
     myBut.locate(width / 2-myBut.width/2, 3 * height / 4);
     myBut.onPress = function() {
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menuselection);
     }
   }
@@ -368,6 +371,8 @@ function yeah() {
     myBut.text = "menu de sélection"
     myBut.locate(width / 3 - myBut.width / 2, 2 * height / 3);
     myBut.onPress = function() {
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     myButm = new Clickable();
@@ -377,7 +382,8 @@ function yeah() {
     myButm.text = "menu de sélection"
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.showScene(menu);
     }
   }
@@ -398,12 +404,16 @@ function yeahMedaille() {
     myBut = new Clickable();
     myBut.locate(width / 3 - myBut.width / 2, 2 * height / 3);
     myBut.onPress = function() {
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     myButm = new Clickable();
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
       nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.showScene(menu);
     }
     var saveP = myStorage.getItem('' + user)
@@ -457,6 +467,24 @@ function menuselection() {
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
+    lvlselect = new Clickable();
+    lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
+    lvlselect.text = "Selection du niveau"
+    lvlselect.onPress = function() {
+      pause = false
+      mgr.showScene(menuselection);
+    }
+    peopleselect = new Clickable();
+    peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
+    peopleselect.text = "Selection du joueur"
+    peopleselect.onPress = function() {
+      pause = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
+      mgr.showScene(menu);
+    }
 
     var saveP = myStorage.getItem('' + user)
     if (myStorage.getItem('' + user) == null) {
@@ -622,12 +650,23 @@ function menuselection() {
 
   this.draw = function() {
     background(220);
+    cogmenu.draw()
     myButtonin.draw()
     myButtonsho.draw()
     text("Pièces: "+scorg,width/30,29*height/30)
 
     for (var i = 0; i < bouts.length; i++) {
       bouts[i].draw()
+    }
+    
+    if(pause){
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
+      lvlselect.draw()
+      peopleselect.draw()
     }
   }
 
@@ -660,10 +699,10 @@ function menu() {
     sel = createSelect()
     sel.position(width / 2 +nom.width / 2, 4 * height / 10)
     sel.option("")
+    sel.option("a")
     sel.selected("")
     console.log(myStorage.length)
-    for(var i = 0; myStorage.length;i++){
-      console.log(myStorage.key(i))
+    for(var i = 0; i<myStorage.length;i++){
       sel.option(myStorage.key(i))
     }
     sel.changed(changenom)
@@ -740,7 +779,8 @@ function sketch() {
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
       pause = false
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -936,8 +976,11 @@ function sketch() {
       }
       cmpt++
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -983,12 +1026,13 @@ function niveau1() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau1)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau1)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -1227,8 +1271,11 @@ function niveau1() {
     textAlign(CENTER);
     
     if(pause){
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -1277,12 +1324,14 @@ function niveau2() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau2)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau2)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -1474,8 +1523,11 @@ function niveau2() {
       mgr.showScene(yeah)
     }
     if(pause){
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -1524,12 +1576,13 @@ function niveau3() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau3)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -1725,8 +1778,11 @@ function niveau3() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -1777,12 +1833,13 @@ function niveau4() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau4)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -1976,8 +2033,11 @@ function niveau4() {
       mgr.showScene(yeah)
     }
     if(pause){
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -2025,12 +2085,13 @@ function niveau5() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau5)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -2226,8 +2287,11 @@ function niveau5() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -2277,12 +2341,14 @@ function niveau6() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+    
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau6)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -2480,8 +2546,11 @@ function niveau6() {
       mgr.showScene(yeah)
     }
     if(pause){
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -2529,12 +2598,14 @@ function niveau7() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau7)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -2732,8 +2803,11 @@ function niveau7() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -2781,12 +2855,13 @@ function niveau8() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau8)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -2992,9 +3067,13 @@ function niveau8() {
       peopleselect.draw()
     }
     if(selecte!=0){
-      textSize(width/30)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
+      lvlselect.draw()
+      peopleselect.draw()
     }
   }
 }
@@ -3035,12 +3114,14 @@ function niveau9() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau9)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -3240,8 +3321,11 @@ function niveau9() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -3289,12 +3373,13 @@ function niveau10() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau10)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -3494,8 +3579,11 @@ function niveau10() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -3548,12 +3636,14 @@ function niveau11() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau11)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau11)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -3753,8 +3843,11 @@ function niveau11() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -3802,12 +3895,14 @@ function niveau12() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau12)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau12)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -4006,8 +4101,11 @@ function niveau12() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -4055,12 +4153,14 @@ function niveau13() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau13)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau13)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -4260,8 +4360,11 @@ function niveau13() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -4309,12 +4412,14 @@ function niveau14() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau14)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau14)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -4513,8 +4618,11 @@ function niveau14() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -4564,13 +4672,15 @@ function niveau15() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       dix=0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau15)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau15)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -4768,8 +4878,11 @@ function niveau15() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -4819,13 +4932,15 @@ function niveau16() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       dix=0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau16)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau16)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -5017,8 +5132,11 @@ function niveau16() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -5068,13 +5186,15 @@ function niveau17() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       dix=0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau17)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau17)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -5266,8 +5386,11 @@ function niveau17() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -5317,13 +5440,15 @@ function niveau18() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+    
       pause = false
       commandes = []
       dix=0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau18)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau18)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -5515,8 +5640,11 @@ function niveau18() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -5566,13 +5694,15 @@ function niveau19() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
+      
       pause = false
       commandes = []
       dix=0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau19)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau19)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -5764,8 +5894,11 @@ function niveau19() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -5809,19 +5942,22 @@ function niveau20() {
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menuselection);
     }
     peopleselect = new Clickable();
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       pause = false
       commandes = []
       dix=0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
+      mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
@@ -6013,8 +6149,11 @@ function niveau20() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
+      fill(100,240)
+      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(0)
+      textSize(height/20)
+      text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
     }
