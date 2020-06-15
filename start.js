@@ -9,7 +9,7 @@ var scorg =""
 var table
 var chair
 var bar
-
+//myStorage.clear()
 
 function drawtext(x, y, text_array) {
 
@@ -154,6 +154,9 @@ function setup() {
       pause = false
     }
   }
+  for(var i =0; i<myStorage.length;i++){
+    console.log(myStorage.key(i))
+  }
   mgr.showScene(menu);
 
 
@@ -181,7 +184,6 @@ function shop(){
       table = tab[4] ||0
       bar = tab[5] || 0
     }
-    console.log(saveP)
     
     
     
@@ -333,17 +335,20 @@ function test() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     myBut = new Clickable();
-    myBut.locate(width / 2, 3 * height / 4);
+    myBut.width = width/8
+    myBut.height = height/9
+    myBut.textSize = height/25
+    myBut.text = "menu de sélection"
+    myBut.locate(width / 2-myBut.width/2, 3 * height / 4);
     myBut.onPress = function() {
-      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
-      mgr.showScene(menu);
+      mgr.showScene(menuselection);
     }
   }
 
   this.draw = function() {
     background(220)
     textSize(height / 10);
-    text("Game Over", width / 2, height / 2)
+    text("Perdu", width / 2, height / 2)
     myBut.draw()
 
 
@@ -357,11 +362,19 @@ function yeah() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     myBut = new Clickable();
+    myBut.width = width/8
+    myBut.height = height/9
+    myBut.textSize = height/25
+    myBut.text = "menu de sélection"
     myBut.locate(width / 3 - myBut.width / 2, 2 * height / 3);
     myBut.onPress = function() {
       mgr.showScene(menuselection);
     }
     myButm = new Clickable();
+    myButm.width = width/8
+    myButm.height = height/9
+    myButm.textSize = height/25
+    myButm.text = "menu de sélection"
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
       nom.position(width / 2 - nom.width / 2, 4 * height / 10)
@@ -374,9 +387,6 @@ function yeah() {
     textSize(height / 10);
     text("Niveau Réussi", width / 2, height / 4)
     myBut.draw()
-    textSize(height / 20)
-    text("menu de sélection", width / 3, height / 2)
-    text("menu principal", 2 * width / 3, height / 2)
     myButm.draw()
   }
 }
@@ -643,11 +653,27 @@ function menu() {
         return
       }
       nom.position(-1000, -1000)
-      
+      sel.position(-1000,-1000)
       mgr.showScene(menuselection);
     }
+      
+    sel = createSelect()
+    sel.position(width / 2 +nom.width / 2, 4 * height / 10)
+    sel.option("")
+    sel.selected("")
+    console.log(myStorage.length)
+    for(var i = 0; myStorage.length;i++){
+      console.log(myStorage.key(i))
+      //sel.option(myStorage.key(i))
+    }
+    sel.changed(changenom)
 
   }
+  
+  function changenom() {
+    nom.value(sel.value())
+  }
+  
 
   this.draw = function() {
 
@@ -655,7 +681,7 @@ function menu() {
     myButton1.draw()
     stroke(0)
     textSize(width / 10)
-    text("Cooking Math", width / 2, height / 5)
+    text("Cooking Math testo", width / 2, height / 5)
     textSize(width / 25)
     text("Nom:", width / 2, 7 * height / 20)
     //line(width/2,0,width/2,height)
@@ -734,7 +760,6 @@ function sketch() {
 
     ///zone de dépot des commandes
     dep = new depot()
-    console.log(chair)
     
 
   }
@@ -904,7 +929,7 @@ function sketch() {
     if (!pause) { 
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
+        if (commandes[i].updat()) {
           commandes.splice(i, 1)
           perdu++
         }
@@ -1592,8 +1617,9 @@ function niveau3() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -1696,10 +1722,7 @@ function niveau3() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -2095,11 +2118,9 @@ function niveau5() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -2202,10 +2223,7 @@ function niveau5() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -2605,11 +2623,9 @@ function niveau7() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -2713,10 +2729,7 @@ function niveau7() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -2864,11 +2877,9 @@ function niveau8() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -2972,10 +2983,7 @@ function niveau8() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -3123,11 +3131,9 @@ function niveau9() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -3231,10 +3237,7 @@ function niveau9() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -3382,11 +3385,9 @@ function niveau10() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -3490,10 +3491,7 @@ function niveau10() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -3646,11 +3644,9 @@ function niveau11() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -3754,10 +3750,7 @@ function niveau11() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -3905,11 +3898,9 @@ function niveau12() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -4012,10 +4003,7 @@ function niveau12() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -4163,11 +4151,9 @@ function niveau13() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -4271,10 +4257,7 @@ function niveau13() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -4422,11 +4405,9 @@ function niveau14() {
   }
 
   this.draw = function() {
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      if(cmpt!=0){
-        cmpt =0   
-      }
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -4529,10 +4510,7 @@ function niveau14() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -4683,9 +4661,9 @@ function niveau15() {
 
   this.draw = function() {
 
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      cmpt=0
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -4787,10 +4765,7 @@ function niveau15() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -4942,9 +4917,9 @@ function niveau16() {
 
   this.draw = function() {
 
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      cmpt=0
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -5039,10 +5014,7 @@ function niveau16() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -5194,9 +5166,9 @@ function niveau17() {
 
   this.draw = function() {
 
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      cmpt=0
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -5291,10 +5263,7 @@ function niveau17() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -5446,9 +5415,9 @@ function niveau18() {
 
   this.draw = function() {
 
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      cmpt=0
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -5543,10 +5512,7 @@ function niveau18() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -5698,9 +5664,9 @@ function niveau19() {
 
   this.draw = function() {
 
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
-      cmpt=0
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -5795,10 +5761,7 @@ function niveau19() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
@@ -5950,8 +5913,9 @@ function niveau20() {
 
   this.draw = function() {
 
-    if (cmpt % 700 == 0) {
+    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
       demande()
+      cmpt = 0
     }
     background(220);
     image(floork, width/20, height/3);
@@ -6046,10 +6010,7 @@ function niveau20() {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
-        if (commandes[i].update()) {
-          commandes.splice(i, 1)
-          perdu++
-        }
+        commandes[i].update()
       }
     } else {
       fill(255)
