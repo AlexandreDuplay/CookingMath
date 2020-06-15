@@ -664,7 +664,7 @@ function menu() {
     console.log(myStorage.length)
     for(var i = 0; myStorage.length;i++){
       console.log(myStorage.key(i))
-      //sel.option(myStorage.key(i))
+      sel.option(myStorage.key(i))
     }
     sel.changed(changenom)
 
