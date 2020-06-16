@@ -720,7 +720,7 @@ function menu() {
     myButton1.draw()
     stroke(0)
     textSize(width / 10)
-    text("Cooking Math testo", width / 2, height / 5)
+    text("Cooking Math", width / 2, height / 5)
     textSize(width / 25)
     text("Nom:", width / 2, 7 * height / 20)
     //line(width/2,0,width/2,height)
