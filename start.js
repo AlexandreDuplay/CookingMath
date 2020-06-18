@@ -130,9 +130,6 @@ function preload() {
   bronze = loadImage('img/bronze.png');
   silver = loadImage('img/silver.png');
   gold = loadImage('img/gold.png'); 
-  salle = loadImage('img/restaurant.png'); 
-  restaurant = loadImage('img/restaurantj.jpg')
-  best = loadImage('img/best.png');
 }
 
 function setup() {
@@ -148,9 +145,6 @@ function setup() {
   bronze.resize(width/15,width/15)
   silver.resize(width/15,width/15)
   gold.resize(width/15,width/15)
-  best.resize(width/10,width/10)
-  salle.resize(width/2-height/15,2*height/3)
-  restaurant.resize(2*height/3,2*height/3)
   cogmenu = new Clickable(width - 30 - height / 15, 10, cog);
   floork.resize(9*width/20,9*height/15)
   cogmenu.onPress = function() {
@@ -385,7 +379,7 @@ function yeah() {
     myButm.width = width/8
     myButm.height = height/9
     myButm.textSize = height/25
-    myButm.text = "menu principal"
+    myButm.text = "menu de sélection"
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
@@ -398,8 +392,6 @@ function yeah() {
     background(220)
     textSize(height / 10);
     text("Niveau Réussi", width / 2, height / 4)
-    textSize(height/30)
-    text("Pièces :"+scorg,width/2,height/4+height/8)
     myBut.draw()
     myButm.draw()
   }
@@ -410,10 +402,6 @@ function yeahMedaille() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     myBut = new Clickable();
-    myBut.width = width/8
-    myBut.height = height/9
-    myBut.textSize = height/25
-    myBut.text = "menu de sélection"
     myBut.locate(width / 3 - myBut.width / 2, 2 * height / 3);
     myBut.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
@@ -421,12 +409,9 @@ function yeahMedaille() {
       mgr.showScene(menuselection);
     }
     myButm = new Clickable();
-    myButm.width = width/8
-    myButm.height = height/9
-    myButm.textSize = height/25
-    myButm.text = "menu principal"
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
+      nom.position(width / 2 - nom.width / 2, 4 * height / 10)
       mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.showScene(menu);
@@ -456,6 +441,9 @@ function yeahMedaille() {
     textSize(height / 10);
     text("Niveau Réussi", width / 2, height / 4)
     myBut.draw()
+    textSize(height / 20)
+    text("menu de sélection", width / 3, height / 2)
+    text("menu principal", 2 * width / 3, height / 2)
     myButm.draw()
     textSize(height / 30)
     fill(0)
@@ -693,40 +681,38 @@ function menu() {
     createCanvas(windowWidth, windowHeight);
     nom = createInput()
     user =""
-    nom.position(width / 4 - nom.width / 2, height / 2)
+    nom.position(width / 2 - nom.width / 2, 4 * height / 10)
     myButton1 = new Clickable();
     myButton1.text = "valider"
-    myButton1.locate(width / 2 - myButton1.width / 2, 2*height / 3);
+    myButton1.locate(width / 2 - myButton1.width / 2, height / 2);
     myButton1.onPress = function() {
-      if(nom.value() != ""){
-        user = nom.value()
-      }else{
-        user = sel.value()
-      }
+      user = nom.value()
       if (user == "") {
-        alert("Créez un comptes ou selectionnez en un dans le menu déroulant")
+        alert("rentrez un nom")
         return
       }
       nom.position(-1000, -1000)
       sel.position(-1000,-1000)
-      if(nom.value() != ""){
-        mgr.showScene(histoire);
-      }else{
-        mgr.showScene(menuselection);
-      }
-      
+      mgr.showScene(menuselection);
     }
       
     sel = createSelect()
-    sel.position(3*width / 4-sel.width/2, height / 2)
+    sel.position(width / 2 +nom.width / 2, 4 * height / 10)
     sel.option("")
+    sel.option("a")
     sel.selected("")
+    console.log(myStorage.length)
     for(var i = 0; i<myStorage.length;i++){
       sel.option(myStorage.key(i))
     }
+    sel.changed(changenom)
 
   }
-    
+  
+  function changenom() {
+    nom.value(sel.value())
+  }
+  
 
   this.draw = function() {
 
@@ -735,101 +721,12 @@ function menu() {
     stroke(0)
     textSize(width / 10)
     text("Cooking Math", width / 2, height / 5)
-    textSize(width / 30)
-    text("Ou", width / 2, 7 * height / 20)
-    text("Nouveau compte:", width / 4, 7 * height / 20)
-    text("Comptes existant:", 3*width / 4, 7 * height / 20)
+    textSize(width / 25)
+    text("Nom:", width / 2, 7 * height / 20)
     //line(width/2,0,width/2,height)
 
   }
 }
-  
-function histoire(){
-  var txt = 0
-  this.setup = function() {
-    createCanvas(windowWidth, windowHeight);
-  }
-  
-  this.mousePressed = function() {
-    txt++
-  }
-  
-  this.draw = function(){
-    background(220);
-    textSize(width/75)
-    
-    text("cliquez pour continuer",width/2,14*height/15)
-    textSize(width/50)
-    textAlign(LEFT)
-    fill(0)
-    if(txt== 0){
-       text("Un beau matin vous recevez une lettre de votre grand-père", 5,height/9)
-    }
-    if(txt>= 1){
-       text("Bonjour "+user+".",5, 2.5*height/9)
-       text("J'èspère que tu vas bien, Je t'envois cette lettre car j'ai décidé de quiter la restauration des chiffres.",5, 3*height/9)  
-    }
-    if(txt>=2){
-       text("Grâce à mes économie, je peux enfin réaliser mon rève, je suis donc partis vivre aux Bahamas.",5, 3.5*height/9)
-    }
-    if(txt>=3){
-       text("Mais je ne pouvais pas juste vendre mon vieux restaurant à n'importe qui.",5, 4*height/9)
-    }
-    if(txt>=4){
-       text("Et comme je sais que tu adores les math culinaires j'ai décidé de te donner les clès.",5, 4.5*height/9)
-    }
-    if(txt>=5){
-       text("Sur ce, bonne chance, moi je vais siroter des noix de coco.",5, 5*height/9)
-    }
-    if(txt>=6){
-       text("À Bientôt, GP.",5, 5.5*height/9)
-    }
-    if(txt>=7){
-      textAlign(CENTER)
-      mgr.showScene(niveau1);
-    }
-  }
-}  
-  
-  
-function journal(){
-  this.setup = function(){
-    createCanvas(windowWidth, windowHeight);
-  }
-  
-  this.mousePressed = function() {
-    mgr.showScene(menuselection)
-  }
-  
-  this.draw = function(){
-    background(200);
-    textAlign(CENTER)
-    textSize(width/20)
-    fill(0)
-    text("Guide Mathlin",width/2,height/12)
-    line(width/8,0,width/8,height)
-    line(width/8,7*height/8,width,7*height/8)
-    image(restaurant,width/8+width/100,height/6)
-    textSize(width/60)
-    textAlign(LEFT)
-    text("Le restaurant du/(de la) jeune chef "+user+" est officiellement le ",width/8+2*height/3+width/50,3*height/12)
-    text("meilleur restaurant du pays. Nos agents lui ont doné la plus grande",width/8+2*height/3+width/50,3.5*height/12)
-    text("récompense jamais donnée.",width/8+2*height/3+width/50,4*height/12)
-    text("'La coupe des signes'",width/8+2*height/3+width/50,4.5*height/12)
-    image(best,width/8+2*height/3+width/50,height/2-width/20)
-    fill(150)
-    rect(width/100,height/75,width/8-width/50,width/8-width/100,20,20,20,20)
-    fill(100)
-    for(var i =0 ; i<28;i++){
-      rect(width/100,(20+2*i)*height/75,width/8-width/50,height/50,20,20,20,20)
-    }
-    for(var i =0 ; i<5;i++){
-      rect(width/8+width/100,(66+2*i)*height/75,6.5*width/8,height/50,20,20,20,20)
-    }
-    
-  }
-}
-
 
 function sketch() {
 
@@ -1021,7 +918,7 @@ function sketch() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     textSize(height / 30);
     text("Hscore : " + highScore, width / 16, height / 15 + 3 * height / 20)
@@ -1233,7 +1130,6 @@ function niveau1() {
     cogmenu.draw()
     dep.display()
     meubles()
-    image(salle, width/2+width/15,height/3)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1258,7 +1154,7 @@ function niveau1() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
 
 
@@ -1483,8 +1379,6 @@ function niveau2() {
 
   function demande() {
     commandes[commandes.length] = new commande(18,10)
-    
-    
   }
 
   this.mousePressed = function() {
@@ -1572,7 +1466,7 @@ function niveau2() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
 
 
@@ -1719,12 +1613,6 @@ function niveau3() {
 
   function demande() {
     commandes[commandes.length] = new commande(18,10)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (18 - 10 + 1)) + 10
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -1786,8 +1674,6 @@ function niveau3() {
       demande()
       cmpt = 0
     }
-    
-    
     background(220);
     image(floork, width/20, height/3);
     cogmenu.draw()
@@ -1821,7 +1707,7 @@ function niveau3() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -1899,10 +1785,6 @@ function niveau3() {
       text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
-    }
-    
-    if(calculators[0].a == 0 && results.length == 0 && commandes.length>0){
-      calculators[0].a = Math.floor(Math.random() * (9 - Math.ceil((commandes[0].chiffre)/2) + 1)) + Math.ceil((commandes[0].chiffre)/2)
     }
     
     if(selecte!=0){
@@ -2094,7 +1976,7 @@ function niveau4() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
 
 
@@ -2239,13 +2121,7 @@ function niveau5() {
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(8,1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (8 - 1 + 1)) + 1
-        i= -1
-      }
-    }
+    commandes[commandes.length] = new commande(8,0)
   }
 
   this.mousePressed = function() {
@@ -2307,9 +2183,6 @@ function niveau5() {
       demande()
       cmpt = 0
     }
-    if(calculators[0].a == 0 && results.length == 0 && commandes.length>0){
-      calculators[0].a = Math.floor(Math.random() * (9 - commandes[0].chiffre + 1) + commandes[0].chiffre)+1
-    }
     background(220);
     image(floork, width/20, height/3);
     cogmenu.draw()
@@ -2343,7 +2216,7 @@ function niveau5() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -2612,7 +2485,7 @@ function niveau6() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -2764,12 +2637,6 @@ function niveau7() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2)*(Math.floor(Math.random() * (5 - 2 + 1)) + 2))
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2)*(Math.floor(Math.random() * (5 - 2 + 1)) + 2))
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -2864,7 +2731,7 @@ function niveau7() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3028,12 +2895,6 @@ function niveau8() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 -0 + 1)) - 0)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 -0 + 1)) - 0)
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -3128,7 +2989,7 @@ function niveau8() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3294,12 +3155,6 @@ function niveau9() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 -1 + 1)) + 1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 -1 + 1)) + 1)
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -3394,7 +3249,7 @@ function niveau9() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3558,12 +3413,6 @@ function niveau10() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -3658,7 +3507,7 @@ function niveau10() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3828,12 +3677,6 @@ function niveau11() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)-1
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)-1
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -3928,7 +3771,7 @@ function niveau11() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4093,12 +3936,6 @@ function niveau12() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 +1 + 1)) - 1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 +1 + 1)) - 1)
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -4193,7 +4030,7 @@ function niveau12() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4357,12 +4194,6 @@ function niveau13() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 +2 + 1)) - 2)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 +2 + 1)) - 2)
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -4457,7 +4288,7 @@ function niveau13() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4622,12 +4453,6 @@ function niveau14() {
   function demande() {
     commandes[commandes.length] = new commande(1,0)
     commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 +3 + 1)) - 3)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre =  ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 +3 + 1)) - 3)
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -4722,7 +4547,7 @@ function niveau14() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4888,12 +4713,6 @@ function niveau15() {
 
   function demande() {
     commandes[commandes.length] = new commande(30, 10)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (30 - 10 + 1)) + 10
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -4989,7 +4808,7 @@ function niveau15() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5155,12 +4974,6 @@ function niveau16() {
 
   function demande() {
     commandes[commandes.length] = new commande(40, 20)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (40 - 20 + 1)) + 20
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -5256,7 +5069,7 @@ function niveau16() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5415,12 +5228,6 @@ function niveau17() {
 
   function demande() {
     commandes[commandes.length] = new commande(50, 30)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (50 - 30 + 1)) + 30
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -5516,7 +5323,7 @@ function niveau17() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5675,12 +5482,6 @@ function niveau18() {
 
   function demande() {
     commandes[commandes.length] = new commande(60, 40)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (60 - 40 + 1)) + 40
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -5776,7 +5577,7 @@ function niveau18() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5935,12 +5736,6 @@ function niveau19() {
 
   function demande() {
     commandes[commandes.length] = new commande(70, 50)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (70 - 50 + 1)) + 50
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -6036,7 +5831,7 @@ function niveau19() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -6196,12 +5991,6 @@ function niveau20() {
 
   function demande() {
     commandes[commandes.length] = new commande(80, 20)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (80 - 20 + 1)) + 20
-        i= -1
-      }
-    }
   }
 
   this.mousePressed = function() {
@@ -6297,7 +6086,7 @@ function niveau20() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("score : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -6351,7 +6140,7 @@ function niveau20() {
 
       mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
-      mgr.showScene(journal)
+      mgr.showScene(yeah)
     }
     if (!pause) {
       cmpt++
