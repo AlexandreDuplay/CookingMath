@@ -130,7 +130,7 @@ function preload() {
   bronze = loadImage('img/bronze.png');
   silver = loadImage('img/silver.png');
   gold = loadImage('img/gold.png'); 
-  salle = loadImage('img/restaurant.png'); 
+  //salle = loadImage('img/restaurant.png'); 
   restaurant = loadImage('img/restaurantj.jpg')
   best = loadImage('img/best.png');
 }
@@ -149,7 +149,7 @@ function setup() {
   silver.resize(width/15,width/15)
   gold.resize(width/15,width/15)
   best.resize(width/10,width/10)
-  salle.resize(width/2-height/15,2*height/3)
+  //salle.resize(width/2-height/15,2*height/3)
   restaurant.resize(2*height/3,2*height/3)
   cogmenu = new Clickable(width - 30 - height / 15, 10, cog);
   floork.resize(9*width/20,9*height/15)
@@ -786,7 +786,7 @@ function histoire(){
     }
     if(txt>=7){
       textAlign(CENTER)
-      mgr.showScene(niveau1);
+      mgr.showScene(menuselection);
     }
   }
 }  
@@ -1089,9 +1089,16 @@ function sketch() {
     }
     
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -1233,7 +1240,7 @@ function niveau1() {
     cogmenu.draw()
     dep.display()
     meubles()
-    image(salle, width/2+width/15,height/3)
+    //image(salle, width/2+width/15,height/3)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
@@ -1384,9 +1391,16 @@ function niveau1() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
 
   }
@@ -1638,9 +1652,16 @@ function niveau2() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
     
   }
@@ -1906,9 +1927,16 @@ function niveau3() {
     }
     
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -2160,9 +2188,16 @@ function niveau4() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
-      fill(01)
+      fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -2423,9 +2458,16 @@ function niveau5() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -2682,9 +2724,16 @@ function niveau6() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -2945,9 +2994,16 @@ function niveau7() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -3200,12 +3256,6 @@ function niveau8() {
         commandes[i].update()
       }
     } else {
-      fill(255)
-      rect(width / 2 - width / 10, height / 4, width / 5, height / 2)
-      lvlselect.draw()
-      peopleselect.draw()
-    }
-    if(selecte!=0){
       fill(100,240)
       rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
       fill(0)
@@ -3213,6 +3263,18 @@ function niveau8() {
       text("Pause",width/2,height/4+height/15)
       lvlselect.draw()
       peopleselect.draw()
+    }
+    if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
+      textSize(width/30)
+      fill(0)
+      text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -3475,9 +3537,16 @@ function niveau9() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -3739,14 +3808,16 @@ function niveau10() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
-    }
-    if(selecte!=0){
-      textSize(width/30)
-      fill(0)
-      text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -4009,9 +4080,16 @@ function niveau11() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -4273,9 +4351,16 @@ function niveau12() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -4538,9 +4623,16 @@ function niveau13() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -4802,9 +4894,16 @@ function niveau14() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -5068,9 +5167,16 @@ function niveau15() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -5328,9 +5434,16 @@ function niveau16() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -5588,9 +5701,16 @@ function niveau17() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -5848,9 +5968,16 @@ function niveau18() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -6108,9 +6235,16 @@ function niveau19() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }
@@ -6369,9 +6503,16 @@ function niveau20() {
       peopleselect.draw()
     }
     if(selecte!=0){
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [0,200,150]
+      }
       textSize(width/30)
       fill(0)
       text(""+selecte,mouseX,mouseY)
+    }else{
+      for(var i = 0;i<calculators.length;i++){
+        calculators[0].c = [100,100,200]
+      }
     }
   }
 }

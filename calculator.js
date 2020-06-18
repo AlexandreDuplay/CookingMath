@@ -5,10 +5,11 @@ function calculator(ope,x_,y_){
   this.cote=height/15;
   this.a =0
   this.b =0
+  this.c = [100,100,200]
   
   this.display = function(){
     stroke(0);
-    fill(100,100,200);
+    fill(this.c);
     square(this.x,this.y, this.cote);
     square(this.x,this.y-this.cote, this.cote);
     square(this.x,this.y+this.cote, this.cote);
