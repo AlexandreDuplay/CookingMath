@@ -130,7 +130,7 @@ function preload() {
   bronze = loadImage('img/bronze.png');
   silver = loadImage('img/silver.png');
   gold = loadImage('img/gold.png'); 
-  salle = loadImage('img/restaurant.png'); 
+  //salle = loadImage('img/restaurant.png'); 
   restaurant = loadImage('img/restaurantj.jpg')
   best = loadImage('img/best.png');
 }
@@ -149,7 +149,7 @@ function setup() {
   silver.resize(width/15,width/15)
   gold.resize(width/15,width/15)
   best.resize(width/10,width/10)
-  salle.resize(width/2-height/15,2*height/3)
+  //salle.resize(width/2-height/15,2*height/3)
   restaurant.resize(2*height/3,2*height/3)
   cogmenu = new Clickable(width - 30 - height / 15, 10, cog);
   floork.resize(9*width/20,9*height/15)
@@ -1233,7 +1233,7 @@ function niveau1() {
     cogmenu.draw()
     dep.display()
     meubles()
-    image(salle, width/2+width/15,height/3)
+    //image(salle, width/2+width/15,height/3)
 
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
