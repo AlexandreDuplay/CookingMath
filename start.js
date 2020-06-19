@@ -1923,7 +1923,7 @@ function niveau3() {
     }
     
     if(calculators[0].a == 0 && results.length == 0 && commandes.length>0){
-      calculators[0].a = Math.floor(Math.random() * (9 - Math.ceil((commandes[0].chiffre)/2) + 1)) + Math.ceil((commandes[0].chiffre)/2)
+      calculators[0].a = Math.floor(Math.random() * (Math.ceil((commandes[0].chiffre)/2)-(9 - (9-Math.ceil((commandes[0].chiffre)/2))) + 1)) + Math.ceil((commandes[0].chiffre)/2)-(9-Math.ceil((commandes[0].chiffre)/2))
     }
     
     if(selecte!=0){

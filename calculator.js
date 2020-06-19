@@ -9,9 +9,16 @@ function calculator(ope,x_,y_){
   
   this.display = function(){
     stroke(0);
-    fill(this.c);
+    fill(100,100,200);
     square(this.x,this.y, this.cote);
+    if(this.a==0){
+      fill(this.c)
+    }
     square(this.x,this.y-this.cote, this.cote);
+    fill(100,100,200);
+    if(this.b ==0){
+      fill(this.c)
+    }   
     square(this.x,this.y+this.cote, this.cote);
     
     stroke(0);
