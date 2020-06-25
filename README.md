@@ -7,7 +7,7 @@ Cooking Math est un jeu éducatif permetant au enfant en primaire de s'entrainer
 ###Liens
 
 - Pour jouer : **[Jeu en ligne](https://alexandreduplay.github.io/CookingMath/)**
-- [Documentation ](http://madocumentation/)
+- [Documentation ](https://github.com/AlexandreDuplay/CookingMath/blob/master/Documentation.txt)
 - [Code source](https://github.com/AlexandreDuplay/CookingMath/)
 
 ###Licence
