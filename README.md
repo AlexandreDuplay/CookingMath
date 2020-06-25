@@ -1,7 +1,8 @@
 En cours d'écriture
 
 # CookingMath
-[![Capture d'écran](https://zupimages.net/viewer.php?id=20/26/dde6.png "Capture d'écran")](http://monjeuenligne "Capture d'écran")
+[![Capture d'écran](https://zupimages.net/up/20/26/dde6.png "Capture d'écran")]
+(http://monjeuenligne "Capture d'écran")
 
 ###Presentation du jeu
   Cooking Math est un jeu éducatif permetant au enfant en primaire de s'entrainer au calcul, le joueur devra satisfaire les commandes des clients de son restaurant. Les commandes ne seront pas des plats mais bien des nombres et pour remplir son devoir de chef des matth le joueur devra utiliser ses machines de calculs et ses neuronnes pour ne pas faire attendre ses précieux clients.
