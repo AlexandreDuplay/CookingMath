@@ -5,18 +5,20 @@ function calculator(ope,x_,y_){
   this.cote=height/15;
   this.a =0
   this.b =0
+  this.blocka = false
+  this.blockb = false
   this.c = [100,100,200]
   
   this.display = function(){
     stroke(0);
     fill(100,100,200);
     square(this.x,this.y, this.cote);
-    if(this.a==0){
+    if(!this.blocka){
       fill(this.c)
     }
     square(this.x,this.y-this.cote, this.cote);
     fill(100,100,200);
-    if(this.b ==0){
+    if(!this.blockb){
       fill(this.c)
     }   
     square(this.x,this.y+this.cote, this.cote);
@@ -73,11 +75,11 @@ function calculator(ope,x_,y_){
   this.updigit = function(x){
     var distx = mouseX -this.x
     var disty = mouseY -this.y
-    if(distx <= this.cote && distx >= 0 && disty <= 2*this.cote && disty >=this.cote) {
+    if(distx <= this.cote && distx >= 0 && disty <= 2*this.cote && disty >=this.cote && !this.blockb) {
       this.b = x;
       return true 
     }
-    if(distx <= this.cote && distx >= 0 && disty <= 0 && disty >=-this.cote) {
+    if(distx <= this.cote && distx >= 0 && disty <= 0 && disty >=-this.cote && !this.blocka) {
       this.a = x;
       return true
     }

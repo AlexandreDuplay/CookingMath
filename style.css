@@ -5,3 +5,9 @@ html, body {
 canvas {
   display: block;
 }
+#target_div {
+    position: fixed;
+    bottom: 15vh;
+    left : 15vw;
+    width: 100%;
+}

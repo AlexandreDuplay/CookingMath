@@ -4,11 +4,28 @@ myStorage = window.localStorage;
 var user
 var cog
 var cogmenu
+var saveButt
 var pause = false
-var scorg =""
+var scorg = ""
 var table
 var chair
 var bar
+var json
+
+
+
+function downloadt(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
 
 
 function drawtext(x, y, text_array) {
@@ -30,91 +47,91 @@ function drawtext(x, y, text_array) {
   }
 }
 
-function meubles(){
+function meubles() {
   imageMode(CENTER)
-    dep.display()
-    if(chair==1){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chairw,0,-height/16)
-	  rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      rotate(radians(90));
-      image(chairw,0,-height/16)
-      pop();
-    }
-    if(chair==2){
-      push();
-      translate(width/2+width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+width/4,height/2+5*height/15)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-      push();
-      translate(width/2+3*width/8,height/2+height/7)
-      image(chaira,0,-height/16)
-	  rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      rotate(radians(90));
-      image(chaira,0,-height/16)
-      pop();
-    }
-    if(table==1){
-      image(tablew,width/2+width/8,height/2+height/7)
-      image(tablew,width/2+width/4,height/2+5*height/15)
-      image(tablew,width/2+3*width/8,height/2+height/7)
-    }
-    if(table==2){
-      image(tablea,width/2+width/8,height/2+height/7)
-      image(tablea,width/2+width/4,height/2+5*height/15)
-      image(tablea,width/2+3*width/8,height/2+height/7)
-    }
-    if(bar == 1){
-      image(bar1,3*width/4+height/10,height/3+bar1.height/2)
-    }   
-    if(bar == 2){
-      image(bar2,3*width/4+height/10,height/3+bar1.height/2)
-    }
+  dep.display()
+  if (chair == 1) {
+    push();
+    translate(width / 2 + width / 8, height / 2 + height / 7)
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    pop();
+    push();
+    translate(width / 2 + width / 4, height / 2 + 5 * height / 15)
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    pop();
+    push();
+    translate(width / 2 + 3 * width / 8, height / 2 + height / 7)
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    rotate(radians(90));
+    image(chairw, 0, -height / 16)
+    pop();
+  }
+  if (chair == 2) {
+    push();
+    translate(width / 2 + width / 8, height / 2 + height / 7)
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    pop();
+    push();
+    translate(width / 2 + width / 4, height / 2 + 5 * height / 15)
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    pop();
+    push();
+    translate(width / 2 + 3 * width / 8, height / 2 + height / 7)
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    rotate(radians(90));
+    image(chaira, 0, -height / 16)
+    pop();
+  }
+  if (table == 1) {
+    image(tablew, width / 2 + width / 8, height / 2 + height / 7)
+    image(tablew, width / 2 + width / 4, height / 2 + 5 * height / 15)
+    image(tablew, width / 2 + 3 * width / 8, height / 2 + height / 7)
+  }
+  if (table == 2) {
+    image(tablea, width / 2 + width / 8, height / 2 + height / 7)
+    image(tablea, width / 2 + width / 4, height / 2 + 5 * height / 15)
+    image(tablea, width / 2 + 3 * width / 8, height / 2 + height / 7)
+  }
+  if (bar == 1) {
+    image(bar1, 3 * width / 4 + height / 10, height / 3 + bar1.height / 2)
+  }
+  if (bar == 2) {
+    image(bar2, 3 * width / 4 + height / 10, height / 3 + bar1.height / 2)
+  }
 
-    imageMode(CORNER)
+  imageMode(CORNER)
 }
 
 function preload() {
@@ -129,30 +146,36 @@ function preload() {
   tablea = loadImage('img/tablea.png');
   bronze = loadImage('img/bronze.png');
   silver = loadImage('img/silver.png');
-  gold = loadImage('img/gold.png'); 
+  gold = loadImage('img/gold.png');
+  logo = loadImage('img/logoCM.png');
   //salle = loadImage('img/restaurant.png'); 
   restaurant = loadImage('img/restaurantj.jpg')
   best = loadImage('img/best.png');
+
 }
 
+
+
 function setup() {
+
   createCanvas(windowWidth, windowHeight);
   cog.resize(height / 15, height / 15)
-  crate.resize(height/15,height/15)
-  bar1.resize(width/2-height/15,height/5)
-  bar2.resize(width/2-height/15,height/5)
-  chairw.resize(height/5,height/5)
-  chaira.resize(height/7,height/7)
-  tablew.resize(height/7,height/7)
-  tablea.resize(height/7,height/7)
-  bronze.resize(width/15,width/15)
-  silver.resize(width/15,width/15)
-  gold.resize(width/15,width/15)
-  best.resize(width/10,width/10)
+  crate.resize(height / 15, height / 15)
+  bar1.resize(width / 2 - height / 15, height / 5)
+  bar2.resize(width / 2 - height / 15, height / 5)
+  chairw.resize(height / 5, height / 5)
+  chaira.resize(height / 7, height / 7)
+  tablew.resize(height / 7, height / 7)
+  tablea.resize(height / 7, height / 7)
+  bronze.resize(width / 15, width / 15)
+  silver.resize(width / 15, width / 15)
+  gold.resize(width / 15, width / 15)
+  best.resize(width / 10, width / 10)
+  logo.resize(3 * width / 4, 5 * height / 6)
   //salle.resize(width/2-height/15,2*height/3)
-  restaurant.resize(2*height/3,2*height/3)
+  restaurant.resize(2 * height / 3, 2 * height / 3)
   cogmenu = new Clickable(width - 30 - height / 15, 10, cog);
-  floork.resize(9*width/20,9*height/15)
+  floork.resize(9 * width / 20, 9 * height / 15)
   cogmenu.onPress = function() {
     if (!pause) {
       pause = true
@@ -160,17 +183,19 @@ function setup() {
       pause = false
     }
   }
+
+
   mgr.showScene(menu);
 
 
 }
 
-function shop(){
+function shop() {
   var lvlLock
   var highScore
-  
-  this.setup = function(){
-    
+
+  this.setup = function() {
+
     var saveP = myStorage.getItem('' + user)
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
@@ -178,159 +203,159 @@ function shop(){
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
-    
-    
-    
-    bar1.resize(height/4,height/5)
-    bar2.resize(height/4,height/5)
-    chairw.resize(height/5,height/6)
-    chaira.resize(height/7,height/7)
-    tablew.resize(height/7,height/7)
-    tablea.resize(height/7,height/7)
-    
+
+
+
+    bar1.resize(height / 4, height / 5)
+    bar2.resize(height / 4, height / 5)
+    chairw.resize(height / 5, height / 6)
+    chaira.resize(height / 7, height / 7)
+    tablew.resize(height / 7, height / 7)
+    tablea.resize(height / 7, height / 7)
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
-      bar1.resize(width/2-height/15,height/5)
-      bar2.resize(width/2-height/15,height/5)
-      chairw.resize(height/5,height/5)
-      chaira.resize(height/7,height/7)
-      tablew.resize(height/7,height/7)
-      tablea.resize(height/7,height/7)
+      bar1.resize(width / 2 - height / 15, height / 5)
+      bar2.resize(width / 2 - height / 15, height / 5)
+      chairw.resize(height / 5, height / 5)
+      chaira.resize(height / 7, height / 7)
+      tablew.resize(height / 7, height / 7)
+      tablea.resize(height / 7, height / 7)
       mgr.scenes[mgr.findSceneIndex(shop)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(shop)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menuselection);
-      
+
     }
     peopleselect = new Clickable();
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      pause =false
-      bar1.resize(width/2-height/15,height/5)
-      bar2.resize(width/2-height/15,height/5)
-      chairw.resize(height/5,height/5)
-      chaira.resize(height/7,height/7)
-      tablew.resize(height/7,height/7)
-      tablea.resize(height/7,height/7)
+      pause = false
+      bar1.resize(width / 2 - height / 15, height / 5)
+      bar2.resize(width / 2 - height / 15, height / 5)
+      chairw.resize(height / 5, height / 5)
+      chaira.resize(height / 7, height / 7)
+      tablew.resize(height / 7, height / 7)
+      tablea.resize(height / 7, height / 7)
       mgr.scenes[mgr.findSceneIndex(shop)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(shop)].enterExecuted = false
       mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menu)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     createCanvas(windowWidth, windowHeight);
-    myBut1 = new Clickable(width/3+width/20,height/6);
+    myBut1 = new Clickable(width / 3 + width / 20, height / 6);
     myBut1.text = "acheter, 100 pièces"
     myBut1.onPress = function() {
-      if(scorg>=100){
-        chair =1
-        scorg-=100
+      if (scorg >= 100) {
+        chair = 1
+        scorg -= 100
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + scorg + "," + chair + "," + table + "," + bar);
       }
     }
-    myBut2 = new Clickable(width/3+width/20,2*height/6);
+    myBut2 = new Clickable(width / 3 + width / 20, 2 * height / 6);
     myBut2.text = "acheter, 500 pièces"
     myBut2.onPress = function() {
-      if(scorg>=500){
-        chair =2
-        scorg-=500
+      if (scorg >= 500) {
+        chair = 2
+        scorg -= 500
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + scorg + "," + chair + "," + table + "," + bar);
       }
     }
-    myBut3 = new Clickable(width/3+width/20,3*height/6);
+    myBut3 = new Clickable(width / 3 + width / 20, 3 * height / 6);
     myBut3.text = "acheter, 200 pièces"
     myBut3.onPress = function() {
-      if(scorg>=200){
-        table =1
-        scorg-=200
+      if (scorg >= 200) {
+        table = 1
+        scorg -= 200
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + scorg + "," + chair + "," + table + "," + bar);
       }
     }
-    myBut4 = new Clickable(width/3+width/20,4*height/6);
+    myBut4 = new Clickable(width / 3 + width / 20, 4 * height / 6);
     myBut4.text = "acheter, 1000 pièces"
     myBut4.onPress = function() {
-      if(scorg>=1000){
-        table =2
-        scorg-=1000
+      if (scorg >= 1000) {
+        table = 2
+        scorg -= 1000
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
-      }
-    }    
-    myBut5 = new Clickable(2*width/3+width/20,height/6);
-    myBut5.text = "acheter, 2000 pièces"
-    myBut5.onPress = function() {
-      if(scorg>=2000){
-        bar =1
-        scorg-=2000
-        myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + scorg + "," + chair + "," + table + "," + bar);
       }
     }
-    myBut6 = new Clickable(2*width/3+width/20,3*height/6);
+    myBut5 = new Clickable(2 * width / 3 + width / 20, height / 6);
+    myBut5.text = "acheter, 2000 pièces"
+    myBut5.onPress = function() {
+      if (scorg >= 2000) {
+        bar = 1
+        scorg -= 2000
+        myStorage.setItem('' + user, "");
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + scorg + "," + chair + "," + table + "," + bar);
+      }
+    }
+    myBut6 = new Clickable(2 * width / 3 + width / 20, 3 * height / 6);
     myBut6.text = "acheter, 3000 pièces"
     myBut6.onPress = function() {
-      if(scorg>=3000){
-        bar =2
-        scorg-=3000
+      if (scorg >= 3000) {
+        bar = 2
+        scorg -= 3000
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+scorg+","+chair+","+table+","+bar);
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + scorg + "," + chair + "," + table + "," + bar);
       }
     }
   }
-  
-  this.draw = function(){
-    background(220)
+
+  this.draw = function() {
+    background(235, 220, 180)
     cogmenu.draw()
-    text("Pièces: "+scorg,width/30,29*height/30)
-    image(chairw, width/3-width/20, 1*height/6);
-    image(chaira, width/3-width/20, 2*height/6);
-    image(tablew, width/3-width/20, 3*height/6);
-    image(tablea, width/3-width/20, 4*height/6);
-    image(bar1, 2*width/3-width/20, 1*height/6);
-    image(bar2, 2*width/3-width/20, 3*height/6);
-    if(chair!=1){
-       myBut1.draw()
+    text("Pièces: " + scorg, width / 30, 29 * height / 30)
+    image(chairw, width / 3 - width / 20, 1 * height / 6);
+    image(chaira, width / 3 - width / 20, 2 * height / 6);
+    image(tablew, width / 3 - width / 20, 3 * height / 6);
+    image(tablea, width / 3 - width / 20, 4 * height / 6);
+    image(bar1, 2 * width / 3 - width / 20, 1 * height / 6);
+    image(bar2, 2 * width / 3 - width / 20, 3 * height / 6);
+    if (chair != 1) {
+      myBut1.draw()
     }
-    if(chair!=2){
-       myBut2.draw()
+    if (chair != 2) {
+      myBut2.draw()
     }
-    if(table!=1){
-       myBut3.draw()
+    if (table != 1) {
+      myBut3.draw()
     }
-    if(table!=2){
-       myBut4.draw()
+    if (table != 2) {
+      myBut4.draw()
     }
-    if(bar!=1){
-       myBut5.draw()
+    if (bar != 1) {
+      myBut5.draw()
     }
-    if(bar!=2){
-       myBut6.draw()
+    if (bar != 2) {
+      myBut6.draw()
     }
-    
-    if(pause){
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+
+    if (pause) {
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -342,11 +367,11 @@ function test() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     myBut = new Clickable();
-    myBut.width = width/8
-    myBut.height = height/9
-    myBut.textSize = height/25
-    myBut.text = "menu de sélection"
-    myBut.locate(width / 2-myBut.width/2, 3 * height / 4);
+    myBut.width = width / 8
+    myBut.height = height / 9
+    myBut.textSize = height / 25
+    myBut.text = "Niveaux"
+    myBut.locate(width / 2 - myBut.width / 2, 3 * height / 4);
     myBut.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -355,7 +380,7 @@ function test() {
   }
 
   this.draw = function() {
-    background(220)
+    background(235, 220, 180)
     textSize(height / 10);
     text("Perdu", width / 2, height / 2)
     myBut.draw()
@@ -371,10 +396,10 @@ function yeah() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     myBut = new Clickable();
-    myBut.width = width/8
-    myBut.height = height/9
-    myBut.textSize = height/25
-    myBut.text = "menu de sélection"
+    myBut.width = width / 8
+    myBut.height = height / 9
+    myBut.textSize = height / 25
+    myBut.text = "niveaux"
     myBut.locate(width / 3 - myBut.width / 2, 2 * height / 3);
     myBut.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
@@ -382,10 +407,10 @@ function yeah() {
       mgr.showScene(menuselection);
     }
     myButm = new Clickable();
-    myButm.width = width/8
-    myButm.height = height/9
-    myButm.textSize = height/25
-    myButm.text = "menu principal"
+    myButm.width = width / 8
+    myButm.height = height / 9
+    myButm.textSize = height / 25
+    myButm.text = "changement de joueur"
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
@@ -395,11 +420,11 @@ function yeah() {
   }
 
   this.draw = function() {
-    background(220)
+    background(235, 220, 180)
     textSize(height / 10);
     text("Niveau Réussi", width / 2, height / 4)
-    textSize(height/30)
-    text("Pièces :"+scorg,width/2,height/4+height/8)
+    textSize(height / 30)
+    text("Pièces :" + scorg, width / 2, height / 4 + height / 8)
     myBut.draw()
     myButm.draw()
   }
@@ -410,10 +435,10 @@ function yeahMedaille() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     myBut = new Clickable();
-    myBut.width = width/8
-    myBut.height = height/9
-    myBut.textSize = height/25
-    myBut.text = "menu de sélection"
+    myBut.width = width / 8
+    myBut.height = height / 9
+    myBut.textSize = height / 25
+    myBut.text = "niveaux"
     myBut.locate(width / 3 - myBut.width / 2, 2 * height / 3);
     myBut.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
@@ -421,10 +446,10 @@ function yeahMedaille() {
       mgr.showScene(menuselection);
     }
     myButm = new Clickable();
-    myButm.width = width/8
-    myButm.height = height/9
-    myButm.textSize = height/25
-    myButm.text = "menu principal"
+    myButm.width = width / 8
+    myButm.height = height / 9
+    myButm.textSize = height / 25
+    myButm.text = "changement de joueur"
     myButm.locate(2 * width / 3 - myButm.width / 2, 2 * height / 3);
     myButm.onPress = function() {
       mgr.scenes[mgr.findSceneIndex(menu)].setupExecuted = false
@@ -438,13 +463,13 @@ function yeahMedaille() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -452,7 +477,7 @@ function yeahMedaille() {
   }
 
   this.draw = function() {
-    background(220)
+    background(235, 220, 180)
     textSize(height / 10);
     text("Niveau Réussi", width / 2, height / 4)
     myBut.draw()
@@ -461,13 +486,11 @@ function yeahMedaille() {
     fill(0)
     text("Vous avez débloqué une nouvelle médaille des 'chefs des maths'", width / 2, 3 * height / 4 + height / 10)
     if (lvlLock >= 4 && lvlLock < 9) {
-      image(bronze,width / 2 - height / 30, 3 * height / 4-width/15)
-    }
-    else if (lvlLock >= 9 && lvlLock < 19 ) {
-      image(silver,width / 2 - height / 30, 3 * height / 4-width/15)
-    }
-    else if (lvlLock >= 19) {
-      image(gold,width / 2 - height / 30, 3 * height / 4-width/15)
+      image(bronze, width / 2 - height / 30, 3 * height / 4 - width / 15)
+    } else if (lvlLock >= 9 && lvlLock < 19) {
+      image(silver, width / 2 - height / 30, 3 * height / 4 - width / 15)
+    } else if (lvlLock >= 19) {
+      image(gold, width / 2 - height / 30, 3 * height / 4 - width / 15)
     }
   }
 }
@@ -505,13 +528,13 @@ function menuselection() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
     var x = width / 6
@@ -637,6 +660,13 @@ function menuselection() {
       } else {
         bouts[i].color = 100
       }
+
+      saveButt = new Clickable();
+      saveButt.text = "télécharger la sauvegarde"
+      saveButt.locate(width / 4 - saveButt.width / 2, 5 * height / 6);
+      saveButt.onPress = function() {
+        downloadt("save.json", '{\n "name" : "' + user + '" ,\n "HS" :' + tab[0] + ' ,\n "lvlL" : ' + tab[1] + ' ,\n "scorg" : ' + tab[2] + ' ,\n "chair" : ' + tab[3] + ' ,\n "table" : ' + tab[4] + ' ,\n "bar" : ' + tab[5] + "\n}")
+      }
     }
 
     ///mode infini
@@ -651,7 +681,7 @@ function menuselection() {
     ///shop
     myButtonsho = new Clickable();
     myButtonsho.text = "magasin"
-    myButtonsho.locate(3*width / 4 - myButtonsho.width / 2, 5 * height / 6);
+    myButtonsho.locate(3 * width / 4 - myButtonsho.width / 2, 5 * height / 6);
     myButtonsho.onPress = function() {
 
       mgr.showScene(shop);
@@ -661,22 +691,25 @@ function menuselection() {
   }
 
   this.draw = function() {
-    background(220);
+    background(235, 220, 180);
     cogmenu.draw()
+    saveButt.draw()
     myButtonin.draw()
     myButtonsho.draw()
-    text("Pièces: "+scorg,width/30,29*height/30)
+    textSize(width / 50)
+    textAlign(LEFT)
+    text("Pièces: " + scorg, width / 100, 29 * height / 30)
 
     for (var i = 0; i < bouts.length; i++) {
       bouts[i].draw()
     }
-    
-    if(pause){
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+
+    if (pause) {
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
@@ -688,145 +721,186 @@ function menuselection() {
 
 
 function menu() {
-
+  var premier = true
+  var input
   this.setup = function() {
-    createCanvas(windowWidth, windowHeight);
+    var canvas = createCanvas(windowWidth, windowHeight);
+    canvas.position(0, 0)
+    canvas.style("z-index", '-1')
     nom = createInput()
-    user =""
+    user = ""
     nom.position(width / 4 - nom.width / 2, height / 2)
     myButton1 = new Clickable();
     myButton1.text = "valider"
-    myButton1.locate(width / 2 - myButton1.width / 2, 2*height / 3);
+    myButton1.locate(width / 2 - myButton1.width / 2, 2 * height / 3);
     myButton1.onPress = function() {
-      if(nom.value() != ""){
+      if (nom.value() != "") {
         user = nom.value()
-      }else{
+      } else {
         user = sel.value()
       }
       if (user == "") {
         alert("Créez un comptes ou selectionnez en un dans le menu déroulant")
         return
       }
+      document.getElementById('target_div').style.display = 'none';
       nom.position(-1000, -1000)
-      sel.position(-1000,-1000)
-      if(nom.value() != ""){
+      sel.position(-1000, -1000)
+      if (nom.value() != "") {
         mgr.showScene(histoire);
-      }else{
+      } else {
         mgr.showScene(menuselection);
       }
-      
-    }
-      
-    sel = createSelect()
-    sel.position(3*width / 4-sel.width/2, height / 2)
-    sel.option("")
-    sel.selected("")
-    for(var i = 0; i<myStorage.length;i++){
-      sel.option(myStorage.key(i))
+
     }
 
+
+
+    if (premier) {
+
+      input = document.createElement('input');
+      input.type = "file";
+      document.getElementById('target_div').appendChild(input);
+      //input.position(width/8,7*height/8)
+
+      premier = false
+    }
+    var sel = createSelect()
+
+    sel.option("")
+    sel.selected("")
+
+    sel.position(3 * width / 4 - sel.width / 2, height / 2)
+    for (var i = 0; i < myStorage.length; i++) {
+      sel.option(myStorage.key(i))
+    }
+    input.addEventListener('change', function(e) {
+      const reader = new FileReader()
+
+      reader.onload = receivedText;
+
+      reader.readAsText(input.files[0])
+      nom.position(-1000, -1000)
+      sel.position(-1000, -1000)
+      document.getElementById('target_div').style.display = 'none';
+      mgr.showScene(menuselection);
+    }, false)
+
+    function receivedText(e) {
+      let lines = e.target.result;
+      data = JSON.stringify(lines);
+      newArr = JSON.parse(lines);
+      myStorage.setItem('' + newArr.name, "" + newArr.HS + "," + newArr.lvlL + "," + newArr.scorg + "," + newArr.chair + "," + newArr.table + "," + newArr.bar);
+      user = '' + newArr.name
+    }
+
+    document.getElementById('target_div').style.display = 'block';
   }
-    
+
 
   this.draw = function() {
 
-    background(220);
+    background(235, 220, 180)
     myButton1.draw()
+    //myButton2.draw()
     stroke(0)
-    textSize(width / 10)
-    text("Cooking Math", width / 2, height / 5)
+    //textSize(width / 10) 
+    //text("Cooking Math", width / 2, height / 5)
+    imageMode(CENTER)
+    image(logo, width / 2, height / 5)
     textSize(width / 30)
-    text("Ou", width / 2, 7 * height / 20)
-    text("Nouveau compte:", width / 4, 7 * height / 20)
-    text("Comptes existant:", 3*width / 4, 7 * height / 20)
+    text("Ou", width / 2, 9 * height / 20)
+    text("Nouveau compte:", width / 4, 9 * height / 20)
+    text("Comptes existant:", 3 * width / 4, 9 * height / 20)
     //line(width/2,0,width/2,height)
 
   }
 }
-  
-function histoire(){
+
+function histoire() {
   var txt = 0
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
   }
-  
+
   this.mousePressed = function() {
     txt++
   }
-  
-  this.draw = function(){
-    background(220);
-    textSize(width/75)
-    
-    text("cliquez pour continuer",width/2,14*height/15)
-    textSize(width/50)
+
+  this.draw = function() {
+    background(235, 220, 180)
+    textSize(width / 75)
+
+    text("cliquez pour continuer", width / 2, 14 * height / 15)
+    textSize(width / 50)
     textAlign(LEFT)
     fill(0)
-    if(txt== 0){
-       text("Un beau matin vous recevez une lettre de votre grand-père", 5,height/9)
+    if (txt == 0) {
+      text("Un beau matin vous recevez une lettre de votre grand-père", 5, height / 9)
     }
-    if(txt>= 1){
-       text("Bonjour "+user+".",5, 2.5*height/9)
-       text("J'èspère que tu vas bien, Je t'envois cette lettre car j'ai décidé de quiter la restauration des chiffres.",5, 3*height/9)  
+    if (txt >= 1) {
+      text("Bonjour " + user + ".", 5, 2.5 * height / 9)
+      text("J'èspère que tu vas bien, Je t'envoie cette lettre car j'ai décidé de quitter la restauration des chiffres.", 5, 3 * height / 9)
     }
-    if(txt>=2){
-       text("Grâce à mes économie, je peux enfin réaliser mon rève, je suis donc partis vivre aux Bahamas.",5, 3.5*height/9)
+    if (txt >= 2) {
+      text("Grâce à mes économie, je peux enfin réaliser mon rève, je suis donc parti vivre aux Bahamas.", 5, 3.5 * height / 9)
     }
-    if(txt>=3){
-       text("Mais je ne pouvais pas juste vendre mon vieux restaurant à n'importe qui.",5, 4*height/9)
+    if (txt >= 3) {
+      text("Mais je ne pouvais pas juste vendre mon vieux restaurant à n'importe qui.", 5, 4 * height / 9)
     }
-    if(txt>=4){
-       text("Et comme je sais que tu adores les math culinaires j'ai décidé de te donner les clès.",5, 4.5*height/9)
+    if (txt >= 4) {
+      text("Comme je sais que tu adores les maths culinaires j'ai décidé de te donner les clès.", 5, 4.5 * height / 9)
     }
-    if(txt>=5){
-       text("Sur ce, bonne chance, moi je vais siroter des noix de coco.",5, 5*height/9)
+    if (txt >= 5) {
+      text("Sur ce, bonne chance, moi je vais siroter des noix de coco.", 5, 5 * height / 9)
     }
-    if(txt>=6){
-       text("À Bientôt, GP.",5, 5.5*height/9)
+    if (txt >= 6) {
+      text("À Bientôt, GP.", 5, 5.5 * height / 9)
     }
-    if(txt>=7){
+    if (txt >= 7) {
       textAlign(CENTER)
+      txt = 0
       mgr.showScene(menuselection);
     }
   }
-}  
-  
-  
-function journal(){
-  this.setup = function(){
+}
+
+
+function journal() {
+  this.setup = function() {
     createCanvas(windowWidth, windowHeight);
   }
-  
+
   this.mousePressed = function() {
     mgr.showScene(menuselection)
   }
-  
-  this.draw = function(){
-    background(200);
+
+  this.draw = function() {
+    background(235, 220, 180)
     textAlign(CENTER)
-    textSize(width/20)
+    textSize(width / 20)
     fill(0)
-    text("Guide Mathlin",width/2,height/12)
-    line(width/8,0,width/8,height)
-    line(width/8,7*height/8,width,7*height/8)
-    image(restaurant,width/8+width/100,height/6)
-    textSize(width/60)
+    text("Guide Mathlin", width / 2, height / 12)
+    line(width / 8, 0, width / 8, height)
+    line(width / 8, 7 * height / 8, width, 7 * height / 8)
+    image(restaurant, width / 8 + width / 100, height / 6)
+    textSize(width / 60)
     textAlign(LEFT)
-    text("Le restaurant du/(de la) jeune chef "+user+" est officiellement le ",width/8+2*height/3+width/50,3*height/12)
-    text("meilleur restaurant du pays. Nos agents lui ont doné la plus grande",width/8+2*height/3+width/50,3.5*height/12)
-    text("récompense jamais donnée.",width/8+2*height/3+width/50,4*height/12)
-    text("'La coupe des signes'",width/8+2*height/3+width/50,4.5*height/12)
-    image(best,width/8+2*height/3+width/50,height/2-width/20)
+    text("Le restaurant du/(de la) jeune chef " + user + " est officiellement le ", width / 8 + 2 * height / 3 + width / 50, 3 * height / 12)
+    text("meilleur restaurant du pays. Nos agents lui ont doné la plus grande", width / 8 + 2 * height / 3 + width / 50, 3.5 * height / 12)
+    text("récompense jamais donnée.", width / 8 + 2 * height / 3 + width / 50, 4 * height / 12)
+    text("'La coupe des signes'", width / 8 + 2 * height / 3 + width / 50, 4.5 * height / 12)
+    image(best, width / 8 + 2 * height / 3 + width / 50, height / 2 - width / 20)
     fill(150)
-    rect(width/100,height/75,width/8-width/50,width/8-width/100,20,20,20,20)
+    rect(width / 100, height / 75, width / 8 - width / 50, width / 8 - width / 100, 20, 20, 20, 20)
     fill(100)
-    for(var i =0 ; i<28;i++){
-      rect(width/100,(20+2*i)*height/75,width/8-width/50,height/50,20,20,20,20)
+    for (var i = 0; i < 28; i++) {
+      rect(width / 100, (20 + 2 * i) * height / 75, width / 8 - width / 50, height / 50, 20, 20, 20, 20)
     }
-    for(var i =0 ; i<5;i++){
-      rect(width/8+width/100,(66+2*i)*height/75,6.5*width/8,height/50,20,20,20,20)
+    for (var i = 0; i < 5; i++) {
+      rect(width / 8 + width / 100, (66 + 2 * i) * height / 75, 6.5 * width / 8, height / 50, 20, 20, 20, 20)
     }
-    
+
   }
 }
 
@@ -846,7 +920,7 @@ function sketch() {
   var perdu = 0
   var highScore = ""
   var lvlLock = ""
-  
+
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     var saveP = myStorage.getItem('' + user)
@@ -856,18 +930,18 @@ function sketch() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
-    
 
-    
+
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
@@ -891,7 +965,7 @@ function sketch() {
 
 
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
 
     /// création des calculator
@@ -903,12 +977,12 @@ function sketch() {
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
 
   }
 
   function demande() {
-    var commsize =commandes.length
+    var commsize = commandes.length
     switch (floor(scor / 100)) {
       case 0:
         commandes[commsize] = new commande(40, 10)
@@ -954,7 +1028,7 @@ function sketch() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(),"" , calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "", calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -983,18 +1057,18 @@ function sketch() {
     if (scor > highScore) {
       highScore = scor
     }
-    
-    
+
+
     if (cmpt % 700 == 0) {
       demande()
-      cmpt=0
+      cmpt = 0
     }
-    background(220);
+    background(255)
     cogmenu.draw()
-    image(floork, width/20, height/3);
+    image(floork, width / 20, height / 3);
     meubles()
-    
-    
+
+
     ///affichage des chiffres (ingrédients)
     for (var i = 0; i < chiffres.length; i++) {
       chiffres[i].display()
@@ -1021,7 +1095,7 @@ function sketch() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     textSize(height / 30);
     text("Hscore : " + highScore, width / 16, height / 15 + 3 * height / 20)
@@ -1041,35 +1115,35 @@ function sketch() {
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
-    for(var i = 0 ; i<perdu;i++){
-      fill(255,0,0)
-      square(width / 7 + (i * 2 )* height/15  +height/30, height / 4, height / 15)
+    for (var i = 0; i < perdu; i++) {
+      fill(255, 0, 0)
+      square(width / 7 + (i * 2) * height / 15 + height / 30, height / 4, height / 15)
     }
-    
+
     if (perdu >= 3) {
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
-      commandes=[]
+      commandes = []
       var gscor = parseInt(scorg)
-      var bb = gscor+scor
+      var bb = gscor + scor
       cmpt = 0
       myStorage.setItem('' + user, "");
-      myStorage.setItem('' + user, "" + highScore + "," + Math.max(floor(highScore / 100), lvlLock)+","+bb+","+chair+","+table+","+bar);
+      myStorage.setItem('' + user, "" + highScore + "," + Math.max(floor(highScore / 100), lvlLock) + "," + bb + "," + chair + "," + table + "," + bar);
       perdu = 0
       scor = 0
       mgr.showScene(test);
     }
-    
-    if (!pause) { 
+
+    if (!pause) {
       for (var i = 0; i < commandes.length; i++) {
         commandes[i].display()
         if (commandes[i].updat()) {
@@ -1079,25 +1153,27 @@ function sketch() {
       }
       cmpt++
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        for (var i = 0; i < calculators.length; i++) {
+          calculators[i].c = [0, 200, 150]
+        }
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
@@ -1120,7 +1196,7 @@ function niveau1() {
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
-    chiffres[0] = new chiffre(6, width / 20, height / 2,crate)
+    chiffres[0] = new chiffre(6, width / 20, height / 2, crate)
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
@@ -1161,19 +1237,19 @@ function niveau1() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
 
   }
 
@@ -1206,7 +1282,7 @@ function niveau1() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -1232,8 +1308,8 @@ function niveau1() {
   }
 
   this.draw = function() {
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
     }
@@ -1265,7 +1341,7 @@ function niveau1() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
 
 
@@ -1291,13 +1367,13 @@ function niveau1() {
     ellipse(width / 2 + height / 30, height / 10 + height / 30, height / 11, height / 11)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     textAlign(LEFT)
@@ -1361,13 +1437,13 @@ function niveau1() {
     if (commandes.length == 0) {
       if (lvlLock == 0) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 1+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 1 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -1380,26 +1456,26 @@ function niveau1() {
 
 
     textAlign(CENTER);
-    
-    if(pause){
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+
+    if (pause) {
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
 
@@ -1425,7 +1501,7 @@ function niveau2() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 5; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -1480,25 +1556,25 @@ function niveau2() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(18,10)
-    
-    
+    commandes[commandes.length] = new commande(18, 10)
+
+
   }
 
   this.mousePressed = function() {
@@ -1526,7 +1602,7 @@ function niveau2() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -1552,9 +1628,9 @@ function niveau2() {
   }
 
   this.draw = function() {
-    
-    background(220);
-    image(floork, width/20, height/3);
+
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -1586,7 +1662,7 @@ function niveau2() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
 
 
@@ -1610,30 +1686,30 @@ function niveau2() {
     textSize(width / 100)
     fill(0)
     textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    text("4 petites additions", width / 7 + width / 14, 3 * height / 15 + height / 45)
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (commandes.length == 0) {
 
       if (lvlLock <= 1) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 2+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 2 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -1642,31 +1718,31 @@ function niveau2() {
       mgr.scenes[mgr.findSceneIndex(niveau2)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    if(pause){
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+    if (pause) {
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
-    
+
   }
 }
-      
+
 function niveau3() {
   var chiffres = []
   var calculators = []
@@ -1681,12 +1757,12 @@ function niveau3() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -1715,7 +1791,7 @@ function niveau3() {
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-
+    calculators[0].blocka = true
     var saveP = myStorage.getItem('' + user)
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
@@ -1723,27 +1799,27 @@ function niveau3() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(18,10)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (18 - 10 + 1)) + 10
-        i= -1
+    commandes[commandes.length] = new commande(18, 10)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (18 - 10 + 1)) + 10
+        i = -1
       }
     }
   }
@@ -1777,7 +1853,7 @@ function niveau3() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -1803,14 +1879,14 @@ function niveau3() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    
-    
-    background(220);
-    image(floork, width/20, height/3);
+
+
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -1842,7 +1918,7 @@ function niveau3() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -1870,30 +1946,30 @@ function niveau3() {
     textSize(width / 100)
     fill(0)
     textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    text("Maintenant, peux-tu réalliser 10 commandes ?", width / 7 + width / 14, 3 * height / 15 + height / 45)
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 2) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 3+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 3 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -1905,7 +1981,7 @@ function niveau3() {
       mgr.scenes[mgr.findSceneIndex(niveau3)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -1913,29 +1989,29 @@ function niveau3() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    
-    if(calculators[0].a == 0 && results.length == 0 && commandes.length>0){
-      calculators[0].a = Math.floor(Math.random() * (Math.ceil((commandes[0].chiffre)/2)-(9 - (9-Math.ceil((commandes[0].chiffre)/2))) + 1)) + Math.ceil((commandes[0].chiffre)/2)-(9-Math.ceil((commandes[0].chiffre)/2))
+
+    if (calculators[0].a == 0 && results.length == 0 && commandes.length > 0) {
+      calculators[0].a = Math.floor(Math.random() * (9 - (commandes[0].chiffre-9) + 1)) + (commandes[0].chiffre-9)
     }
-    
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
@@ -1955,12 +2031,12 @@ function niveau4() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix =0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 4; i < 9; i++) {
-      chiffres[i - 4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i - 4] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     calculators[0] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
 
@@ -1990,7 +2066,7 @@ function niveau4() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     demande()
     commandes[0].x = width / 2 - 3 * height / 15
     commandes[0].y = height / 10
@@ -2015,13 +2091,13 @@ function niveau4() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -2063,7 +2139,7 @@ function niveau4() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -2089,8 +2165,8 @@ function niveau4() {
   }
 
   this.draw = function() {
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -2122,7 +2198,7 @@ function niveau4() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
 
 
@@ -2150,26 +2226,26 @@ function niveau4() {
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (commandes.length == 0) {
 
       if (lvlLock <= 3) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 4+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 4 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -2178,30 +2254,30 @@ function niveau4() {
       mgr.scenes[mgr.findSceneIndex(niveau4)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    if(pause){
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+    if (pause) {
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau5() {
   var chiffres = []
   var calculators = []
@@ -2216,12 +2292,12 @@ function niveau5() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -2250,7 +2326,7 @@ function niveau5() {
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("-", width / 5, height / 3 + height / 15)
-
+    calculators[0].blocka = true
     var saveP = myStorage.getItem('' + user)
     if (myStorage.getItem('' + user) == null) {
       lvlLock = 0
@@ -2258,27 +2334,27 @@ function niveau5() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(8,1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (8 - 1 + 1)) + 1
-        i= -1
+    commandes[commandes.length] = new commande(8, 1)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (8 - 1 + 1)) + 1
+        i = -1
       }
     }
   }
@@ -2312,7 +2388,7 @@ function niveau5() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -2338,15 +2414,15 @@ function niveau5() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    if(calculators[0].a == 0 && results.length == 0 && commandes.length>0){
-      calculators[0].a = Math.floor(Math.random() * (9 - commandes[0].chiffre + 1) + commandes[0].chiffre)+1
+    if (calculators[0].a == 0 && results.length == 0 && commandes.length > 0) {
+      calculators[0].a = Math.floor(Math.random() * (9 - commandes[0].chiffre + 1) + commandes[0].chiffre) + 1
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -2378,7 +2454,7 @@ function niveau5() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -2406,30 +2482,30 @@ function niveau5() {
     textSize(width / 100)
     fill(0)
     textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    text("Maintenant des soustractions", width / 7 + width / 14, 3 * height / 15 + height / 45)
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 4) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 5+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 5 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -2441,7 +2517,7 @@ function niveau5() {
       mgr.scenes[mgr.findSceneIndex(niveau5)].enterExecuted = false
       mgr.showScene(yeahMedaille)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -2449,24 +2525,24 @@ function niveau5() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
@@ -2491,7 +2567,7 @@ function niveau6() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     calculators[0] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
@@ -2510,7 +2586,7 @@ function niveau6() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-    
+
       pause = false
       commandes = []
       scor = 0
@@ -2522,7 +2598,7 @@ function niveau6() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     demande()
     commandes[0].x = width / 2 - 3 * height / 15
     commandes[0].y = height / 10
@@ -2547,13 +2623,13 @@ function niveau6() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -2595,7 +2671,7 @@ function niveau6() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -2621,8 +2697,8 @@ function niveau6() {
   }
 
   this.draw = function() {
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -2654,7 +2730,7 @@ function niveau6() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -2686,26 +2762,26 @@ function niveau6() {
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (commandes.length == 0) {
 
       if (lvlLock <= 5) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 6+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 6 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       mgr.scenes[mgr.findSceneIndex(menuselection)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
@@ -2714,30 +2790,30 @@ function niveau6() {
       mgr.scenes[mgr.findSceneIndex(niveau6)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    if(pause){
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+    if (pause) {
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau7() {
   var chiffres = []
   var calculators = []
@@ -2752,12 +2828,12 @@ function niveau7() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -2774,7 +2850,7 @@ function niveau7() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
       scor = 0
@@ -2795,28 +2871,28 @@ function niveau7() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2)*(Math.floor(Math.random() * (5 - 2 + 1)) + 2))
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2)*(Math.floor(Math.random() * (5 - 2 + 1)) + 2))
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2) * (Math.floor(Math.random() * (5 - 2 + 1)) + 2))
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 2 + 1)) + 2) * (Math.floor(Math.random() * (5 - 2 + 1)) + 2))
+        i = -1
       }
     }
   }
@@ -2850,7 +2926,7 @@ function niveau7() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -2876,12 +2952,12 @@ function niveau7() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -2913,7 +2989,7 @@ function niveau7() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -2942,30 +3018,30 @@ function niveau7() {
     textSize(width / 100)
     fill(0)
     textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
+    text("Allez 10 commandes", width / 7 + width / 14, 3 * height / 15 + height / 45)
     textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 6) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 7+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 7 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -2977,7 +3053,7 @@ function niveau7() {
       mgr.scenes[mgr.findSceneIndex(niveau7)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -2985,29 +3061,29 @@ function niveau7() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau8() {
   var chiffres = []
   var calculators = []
@@ -3022,12 +3098,12 @@ function niveau8() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -3066,28 +3142,28 @@ function niveau8() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 -0 + 1)) - 0)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 -0 + 1)) - 0)
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 - 0 + 1)) - 0)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 - 0 + 1)) - 0)
+        i = -1
       }
     }
   }
@@ -3121,7 +3197,7 @@ function niveau8() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -3147,12 +3223,12 @@ function niveau8() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -3184,7 +3260,7 @@ function niveau8() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3208,35 +3284,29 @@ function niveau8() {
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
     stroke(0);
-    fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 7) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 8+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 8 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -3248,7 +3318,7 @@ function niveau8() {
       mgr.scenes[mgr.findSceneIndex(niveau8)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -3256,29 +3326,29 @@ function niveau8() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau9() {
   var chiffres = []
   var calculators = []
@@ -3293,12 +3363,12 @@ function niveau9() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -3315,7 +3385,7 @@ function niveau9() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
       scor = 0
@@ -3338,28 +3408,28 @@ function niveau9() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 -1 + 1)) + 1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 -1 + 1)) + 1)
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 - 1 + 1)) + 1)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 - 1 + 1)) + 1)
+        i = -1
       }
     }
   }
@@ -3393,7 +3463,7 @@ function niveau9() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -3419,12 +3489,12 @@ function niveau9() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -3456,7 +3526,7 @@ function niveau9() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3481,34 +3551,30 @@ function niveau9() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 8) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 9+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 9 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -3520,7 +3586,7 @@ function niveau9() {
       mgr.scenes[mgr.findSceneIndex(niveau9)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -3528,29 +3594,29 @@ function niveau9() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau10() {
   var chiffres = []
   var calculators = []
@@ -3565,12 +3631,12 @@ function niveau10() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -3599,7 +3665,7 @@ function niveau10() {
       mgr.showScene(menu);
     }
     //calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-    calculators[0] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[0] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[1] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
     var saveP = myStorage.getItem('' + user)
@@ -3609,28 +3675,28 @@ function niveau10() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 + 1 + 1)) - 1)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 + 1 + 1)) - 1)
+        i = -1
       }
     }
   }
@@ -3664,7 +3730,7 @@ function niveau10() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -3690,12 +3756,12 @@ function niveau10() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -3727,7 +3793,7 @@ function niveau10() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -3752,34 +3818,30 @@ function niveau10() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 9) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 10+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 10 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -3791,7 +3853,7 @@ function niveau10() {
       mgr.scenes[mgr.findSceneIndex(niveau10)].enterExecuted = false
       mgr.showScene(yeahMedaile)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -3799,29 +3861,29 @@ function niveau10() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau11() {
   var chiffres = []
   var calculators = []
@@ -3836,12 +3898,12 @@ function niveau11() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -3858,7 +3920,7 @@ function niveau11() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
       scor = 0
@@ -3871,7 +3933,7 @@ function niveau11() {
       mgr.showScene(menu);
     }
     //calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-    calculators[0] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[0] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[1] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
     var saveP = myStorage.getItem('' + user)
@@ -3881,28 +3943,28 @@ function niveau11() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)-1
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 +1 + 1)) - 1)-1
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 + 1 + 1)) - 1) - 1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (0 + 1 + 1)) - 1) - 1
+        i = -1
       }
     }
   }
@@ -3936,7 +3998,7 @@ function niveau11() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -3962,12 +4024,12 @@ function niveau11() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -3999,7 +4061,7 @@ function niveau11() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4024,34 +4086,30 @@ function niveau11() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 10) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 11+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 11 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -4063,7 +4121,7 @@ function niveau11() {
       mgr.scenes[mgr.findSceneIndex(niveau11)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -4071,29 +4129,29 @@ function niveau11() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau12() {
   var chiffres = []
   var calculators = []
@@ -4108,12 +4166,12 @@ function niveau12() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -4130,7 +4188,7 @@ function niveau12() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
       scor = 0
@@ -4143,7 +4201,7 @@ function niveau12() {
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-    calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
     var saveP = myStorage.getItem('' + user)
@@ -4153,28 +4211,28 @@ function niveau12() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 +1 + 1)) - 1)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 +1 + 1)) - 1)
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 + 1 + 1)) - 1)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (1 + 1 + 1)) - 1)
+        i = -1
       }
     }
   }
@@ -4208,7 +4266,7 @@ function niveau12() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -4234,12 +4292,12 @@ function niveau12() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -4271,7 +4329,7 @@ function niveau12() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4296,33 +4354,29 @@ function niveau12() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
     if (dix == 10) {
 
       if (lvlLock <= 11) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 12+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 12 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -4334,7 +4388,7 @@ function niveau12() {
       mgr.scenes[mgr.findSceneIndex(niveau12)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -4342,29 +4396,29 @@ function niveau12() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau13() {
   var chiffres = []
   var calculators = []
@@ -4379,12 +4433,12 @@ function niveau13() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -4401,7 +4455,7 @@ function niveau13() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
       scor = 0
@@ -4414,7 +4468,7 @@ function niveau13() {
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-    calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
     var saveP = myStorage.getItem('' + user)
@@ -4424,28 +4478,28 @@ function niveau13() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 +2 + 1)) - 2)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 +2 + 1)) - 2)
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 + 2 + 1)) - 2)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (2 + 2 + 1)) - 2)
+        i = -1
       }
     }
   }
@@ -4479,7 +4533,7 @@ function niveau13() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -4505,12 +4559,12 @@ function niveau13() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -4542,7 +4596,7 @@ function niveau13() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4567,34 +4621,29 @@ function niveau13() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 12) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 13+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 13 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -4606,7 +4655,7 @@ function niveau13() {
       mgr.scenes[mgr.findSceneIndex(niveau13)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -4614,29 +4663,29 @@ function niveau13() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau14() {
   var chiffres = []
   var calculators = []
@@ -4651,12 +4700,12 @@ function niveau14() {
   var perdu = 0
   var lvlLock = ""
   var highScore = ""
-  var dix=0
+  var dix = 0
 
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
@@ -4673,7 +4722,7 @@ function niveau14() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
       scor = 0
@@ -4686,7 +4735,7 @@ function niveau14() {
       mgr.showScene(menu);
     }
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
-    calculators[1] = new calculator("-", width / 5, 2*height / 3 + height / 15)
+    calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
 
     var saveP = myStorage.getItem('' + user)
@@ -4696,28 +4745,28 @@ function niveau14() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
     ///zone de dépot des commandes
     dep = new depot()
-    
+
   }
 
   function demande() {
-    commandes[commandes.length] = new commande(1,0)
-    commandes[commandes.length-1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 +3 + 1)) - 3)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre =  ((Math.floor(Math.random() * (9 - 3 + 1)) + 3)*(Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 +3 + 1)) - 3)
-        i= -1
+    commandes[commandes.length] = new commande(1, 0)
+    commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 + 3 + 1)) - 3)
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = ((Math.floor(Math.random() * (9 - 3 + 1)) + 3) * (Math.floor(Math.random() * (5 - 3 + 1)) + 3)) + (Math.floor(Math.random() * (3 + 3 + 1)) - 3)
+        i = -1
       }
     }
   }
@@ -4751,7 +4800,7 @@ function niveau14() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -4777,12 +4826,12 @@ function niveau14() {
   }
 
   this.draw = function() {
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
     for (var i = 0; i < commandes.length; i++) {
       commandes[i].display()
@@ -4814,7 +4863,7 @@ function niveau14() {
 
     /// score test 
     textSize(height / 30);
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
     /// nb commandes réussites
     textSize(height / 45);
     textAlign(LEFT)
@@ -4838,34 +4887,29 @@ function niveau14() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Maintenant à vous de jouer", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
-    
+
     if (dix == 10) {
 
       if (lvlLock <= 13) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 14+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 14 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -4877,7 +4921,7 @@ function niveau14() {
       mgr.scenes[mgr.findSceneIndex(niveau14)].enterExecuted = false
       mgr.showScene(yeah)
     }
-    
+
     if (!pause) {
       cmpt++
       for (var i = 0; i < commandes.length; i++) {
@@ -4885,24 +4929,24 @@ function niveau14() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
@@ -4927,16 +4971,16 @@ function niveau15() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
-    
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau15)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau15)].enterExecuted = false
@@ -4946,10 +4990,10 @@ function niveau15() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau15)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau15)].enterExecuted = false
@@ -4959,7 +5003,7 @@ function niveau15() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
     calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
@@ -4971,13 +5015,13 @@ function niveau15() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
     ///zone de dépot des commandes
@@ -4987,10 +5031,10 @@ function niveau15() {
 
   function demande() {
     commandes[commandes.length] = new commande(30, 10)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (30 - 10 + 1)) + 10
-        i= -1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (30 - 10 + 1)) + 10
+        i = -1
       }
     }
   }
@@ -5024,7 +5068,7 @@ function niveau15() {
           }
         }
         if (calculators[i].a != 0 && calculators[i].b != 0) {
-          results[res] = new result(calculators[i].calcul(), ""+calculators[i].a+calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
+          results[res] = new result(calculators[i].calcul(), "" + calculators[i].a + calculators[i].b, calculators[i].x + height / 15 + 1, calculators[i].y)
           res++
         }
       }
@@ -5051,12 +5095,12 @@ function niveau15() {
 
   this.draw = function() {
 
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -5088,7 +5132,7 @@ function niveau15() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5112,34 +5156,29 @@ function niveau15() {
 
     stroke(0);
     fill(255);
-    rect(width / 7 + width / 15, 3 * height / 15, width / 2, height / 8)
-    textSize(width / 100)
     fill(0)
-    textAlign(LEFT)
-    text("Ok, maintenant le premier vrai défis, pourrez vous réaliser 10 commande ?", width / 7 + width / 14, 3 * height / 15 + height / 45)
-    textAlign(CENTER)
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (dix == 10) {
 
       if (lvlLock <= 14) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 15+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 15 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -5158,29 +5197,29 @@ function niveau15() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau16() {
   var chiffres = []
   var calculators = []
@@ -5200,16 +5239,16 @@ function niveau16() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
-    
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau16)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau16)].enterExecuted = false
@@ -5219,10 +5258,10 @@ function niveau16() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau16)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau16)].enterExecuted = false
@@ -5232,7 +5271,7 @@ function niveau16() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
     calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
@@ -5244,13 +5283,13 @@ function niveau16() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -5261,10 +5300,10 @@ function niveau16() {
 
   function demande() {
     commandes[commandes.length] = new commande(40, 20)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (40 - 20 + 1)) + 20
-        i= -1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (40 - 20 + 1)) + 20
+        i = -1
       }
     }
   }
@@ -5325,12 +5364,12 @@ function niveau16() {
 
   this.draw = function() {
 
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -5362,7 +5401,7 @@ function niveau16() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5384,29 +5423,29 @@ function niveau16() {
     line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
-    
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (dix == 10) {
 
       if (lvlLock <= 15) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 16+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 16 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -5425,29 +5464,29 @@ function niveau16() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau17() {
   var chiffres = []
   var calculators = []
@@ -5467,16 +5506,16 @@ function niveau17() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
-    
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau17)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau17)].enterExecuted = false
@@ -5486,10 +5525,10 @@ function niveau17() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau17)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau17)].enterExecuted = false
@@ -5499,7 +5538,7 @@ function niveau17() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
     calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
@@ -5511,13 +5550,13 @@ function niveau17() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -5528,10 +5567,10 @@ function niveau17() {
 
   function demande() {
     commandes[commandes.length] = new commande(50, 30)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (50 - 30 + 1)) + 30
-        i= -1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (50 - 30 + 1)) + 30
+        i = -1
       }
     }
   }
@@ -5573,7 +5612,8 @@ function niveau17() {
     for (var i = 0; i < chiffres.length; i++) {
       selecte = chiffres[i].clicked()
       resboo = false
-      if (selecte != 0) {5
+      if (selecte != 0) {
+        5
         break
       }
     }
@@ -5592,12 +5632,12 @@ function niveau17() {
 
   this.draw = function() {
 
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -5629,7 +5669,7 @@ function niveau17() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5651,29 +5691,29 @@ function niveau17() {
     line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
-    
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (dix == 10) {
 
       if (lvlLock <= 16) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 17+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 17 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -5692,29 +5732,29 @@ function niveau17() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau18() {
   var chiffres = []
   var calculators = []
@@ -5734,16 +5774,16 @@ function niveau18() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
-    
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau18)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau18)].enterExecuted = false
@@ -5753,10 +5793,10 @@ function niveau18() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-    
+
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau18)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau18)].enterExecuted = false
@@ -5766,7 +5806,7 @@ function niveau18() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
     calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
@@ -5778,13 +5818,13 @@ function niveau18() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -5795,10 +5835,10 @@ function niveau18() {
 
   function demande() {
     commandes[commandes.length] = new commande(60, 40)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (60 - 40 + 1)) + 40
-        i= -1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (60 - 40 + 1)) + 40
+        i = -1
       }
     }
   }
@@ -5859,12 +5899,12 @@ function niveau18() {
 
   this.draw = function() {
 
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -5896,7 +5936,7 @@ function niveau18() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -5918,29 +5958,29 @@ function niveau18() {
     line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
-    
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (dix == 10) {
 
       if (lvlLock <= 17) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 18+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 18 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -5959,29 +5999,29 @@ function niveau18() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau19() {
   var chiffres = []
   var calculators = []
@@ -6001,16 +6041,16 @@ function niveau19() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
-    
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau19)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau19)].enterExecuted = false
@@ -6020,10 +6060,10 @@ function niveau19() {
     peopleselect.locate(width / 2 + peopleselect.width / 2, height / 2);
     peopleselect.text = "Selection du joueur"
     peopleselect.onPress = function() {
-      
+
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau19)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau19)].enterExecuted = false
@@ -6033,7 +6073,7 @@ function niveau19() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
     calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
@@ -6045,13 +6085,13 @@ function niveau19() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -6062,10 +6102,10 @@ function niveau19() {
 
   function demande() {
     commandes[commandes.length] = new commande(70, 50)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (70 - 50 + 1)) + 50
-        i= -1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (70 - 50 + 1)) + 50
+        i = -1
       }
     }
   }
@@ -6126,12 +6166,12 @@ function niveau19() {
 
   this.draw = function() {
 
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -6163,7 +6203,7 @@ function niveau19() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -6185,29 +6225,29 @@ function niveau19() {
     line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
-    
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (dix == 10) {
 
       if (lvlLock <= 18) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 19+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 19 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -6226,29 +6266,29 @@ function niveau19() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
 }
-      
+
 function niveau20() {
   var chiffres = []
   var calculators = []
@@ -6268,16 +6308,16 @@ function niveau20() {
   this.setup = function() {
     createCanvas(windowWidth, windowHeight);
     for (var i = 0; i < 9; i++) {
-      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15,crate)
+      chiffres[i] = new chiffre(i + 1, width / 20, 2 * height / 15 + (10 - i + 1) * height / 15, crate)
     }
-    
+
     lvlselect = new Clickable();
     lvlselect.locate(width / 2 - lvlselect.width * 1.5, height / 2);
     lvlselect.text = "Selection du niveau"
     lvlselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
@@ -6291,7 +6331,7 @@ function niveau20() {
     peopleselect.onPress = function() {
       pause = false
       commandes = []
-      dix=0
+      dix = 0
       scor = 0
       mgr.scenes[mgr.findSceneIndex(niveau20)].setupExecuted = false
       mgr.scenes[mgr.findSceneIndex(niveau20)].enterExecuted = false
@@ -6301,7 +6341,7 @@ function niveau20() {
       mgr.scenes[mgr.findSceneIndex(menuselection)].enterExecuted = false
       mgr.showScene(menu);
     }
-    
+
     calculators[0] = new calculator("+", width / 5, height / 3 + height / 15)
     calculators[1] = new calculator("-", width / 5, 2 * height / 3 + height / 15)
     calculators[2] = new calculator("x", 2 * width / 5, 2 * height / 3 + height / 15)
@@ -6313,13 +6353,13 @@ function niveau20() {
       chair = 0
       table = 0
       bar = 0
-    }else{
+    } else {
       var tab = saveP.split(',')
       highScore = tab[0]
-      lvlLock=tab[1]
-      scorg=tab[2]
+      lvlLock = tab[1]
+      scorg = tab[2]
       chair = tab[3] || 0
-      table = tab[4] ||0
+      table = tab[4] || 0
       bar = tab[5] || 0
     }
 
@@ -6330,10 +6370,10 @@ function niveau20() {
 
   function demande() {
     commandes[commandes.length] = new commande(80, 20)
-    for(var i =0;i<commandes.length-1;i++){
-      if(commandes[i].chiffre == commandes[commandes.length-1].chiffre){
-        commandes[commandes.length-1].chiffre = Math.floor(Math.random() * (80 - 20 + 1)) + 20
-        i= -1
+    for (var i = 0; i < commandes.length - 1; i++) {
+      if (commandes[i].chiffre == commandes[commandes.length - 1].chiffre) {
+        commandes[commandes.length - 1].chiffre = Math.floor(Math.random() * (80 - 20 + 1)) + 20
+        i = -1
       }
     }
   }
@@ -6394,12 +6434,12 @@ function niveau20() {
 
   this.draw = function() {
 
-    if ((cmpt >= 700 || cmpt ==0) && commandes.length<= 4) {
+    if ((cmpt >= 700 || cmpt == 0) && commandes.length <= 4) {
       demande()
       cmpt = 0
     }
-    background(220);
-    image(floork, width/20, height/3);
+    background(255)
+    image(floork, width / 20, height / 3);
     cogmenu.draw()
 
     for (var i = 0; i < commandes.length; i++) {
@@ -6431,7 +6471,7 @@ function niveau20() {
 
 
     /// score test 
-    text("pourboir : " + scor, width / 18, height / 15 + 2 * height / 20)
+    text("pièces : " + scor, width / 18, height / 15 + 2 * height / 20)
 
     /// nb commandes réussites
     textSize(height / 45);
@@ -6453,29 +6493,29 @@ function niveau20() {
     line(width / 7 + width / 15, height / 30, 6 * width / 7 - width / 15, height / 30)
     line(width / 7 + width / 15, height / 10, 6 * width / 7 - width / 15, height / 10)
 
-    
+
 
     if (lvlLock >= 5) {
-      image(bronze,width / 2 + width / 7 + width / 15, height / 4-height/15)
+      image(bronze, width / 2 + width / 7 + width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 10) {
-      image(silver,width / 2 + width / 7 + 2*width / 15, height / 4-height/15)
+      image(silver, width / 2 + width / 7 + 2 * width / 15, height / 4 - height / 15)
     }
     if (lvlLock >= 15) {
-      image(gold,width / 2 + width / 7 +3* width / 15, height / 4-height/15)
+      image(gold, width / 2 + width / 7 + 3 * width / 15, height / 4 - height / 15)
     }
 
     if (dix == 10) {
 
       if (lvlLock <= 19) {
         var gscor = parseInt(scorg)
-        gscor+=scor
+        gscor += scor
         myStorage.setItem('' + user, "");
-        myStorage.setItem('' + user, "" + highScore + "," + 19+","+gscor+","+chair+","+table+","+bar);
-      }else{
+        myStorage.setItem('' + user, "" + highScore + "," + 19 + "," + gscor + "," + chair + "," + table + "," + bar);
+      } else {
         var gscor = parseInt(scorg)
-        gscor+=scor
-        myStorage.setItem('' + user, "" + highScore + "," + lvlLock+","+gscor+","+chair+","+table+","+bar);
+        gscor += scor
+        myStorage.setItem('' + user, "" + highScore + "," + lvlLock + "," + gscor + "," + chair + "," + table + "," + bar);
       }
       scor = 0
       dix = 0
@@ -6494,24 +6534,24 @@ function niveau20() {
         commandes[i].update()
       }
     } else {
-      fill(100,240)
-      rect(width / 4, height / 4, width / 2, height / 2,height/30,height/30,height/30,height/30)
+      fill(100, 240)
+      rect(width / 4, height / 4, width / 2, height / 2, height / 30, height / 30, height / 30, height / 30)
       fill(0)
-      textSize(height/20)
-      text("Pause",width/2,height/4+height/15)
+      textSize(height / 20)
+      text("Pause", width / 2, height / 4 + height / 15)
       lvlselect.draw()
       peopleselect.draw()
     }
-    if(selecte!=0){
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [0,200,150]
+    if (selecte != 0) {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [0, 200, 150]
       }
-      textSize(width/30)
+      textSize(width / 30)
       fill(0)
-      text(""+selecte,mouseX,mouseY)
-    }else{
-      for(var i = 0;i<calculators.length;i++){
-        calculators[0].c = [100,100,200]
+      text("" + selecte, mouseX, mouseY)
+    } else {
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].c = [100, 100, 200]
       }
     }
   }
