@@ -1,7 +1,7 @@
 function depot(){
   this.display = function(){
     stroke(0);
-    fill(200,200,100);
+    fill(255,255,0);
     rect(width/2,height/3,width/15,2*height/3-height/15)
   }
   

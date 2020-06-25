@@ -92,6 +92,7 @@ function Clickable(x,y,img)
 	{
 		if (this.img != null)
 		{
+            imageMode(CORNER)
 			image(this.img, this.x, this.y, this.width, this.height);
 		} else
 		{

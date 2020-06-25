@@ -1,8 +1,9 @@
-function commande(){
-  this.chiffre=(Math.floor((Math.random() * 89) + 10))
+function commande(max,min){
+  this.chiffre= Math.floor(Math.random() * (max - min + 1)) + min
   this.x=width/7+width/15;
   this.y=height/10;
   this.cote=height/15;
+  this.sens = true
   
   this.display = function(){
     stroke(255);
@@ -17,10 +18,26 @@ function commande(){
   
   this.update = function(){
     if(this.x>=6*width/7-width/15){
-      console.log("perdu")
+      this.sens = false
+      this.y =height/10 - this.cote
+    }
+    if(this.x<width/7+width/15){
+      this.sens = true
+      this.y =height/10
+    }
+    if(this.sens){
+      this.x+=width/3000
+    }else{
+      this.x-=width/3000
+    }
+    
+  }
+  
+  this.updat = function(){
+    if(this.x>=6*width/7-width/15){
       return true
     }
-    this.x+=width/2000
+    this.x+=width/3000
   }
   
   
