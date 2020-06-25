@@ -12,5 +12,5 @@ Cooking Math est un jeu éducatif permetant au enfant en primaire de s'entrainer
 
 ###Licence
 
-Le code est sous licence libre  [GNU GPL v3](http://lienversmalicence)
+Le code est sous licence libre  [GNU GPL v3](https://github.com/AlexandreDuplay/CookingMath/blob/master/LICENSE)
 En l'état du projet, toutes les ressources multimédia ne sont pas libres, ce qui peut rendre problématique sa distribution.
