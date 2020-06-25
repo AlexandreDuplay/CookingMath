@@ -1,0 +1,11 @@
+Pour jouer c'est très simple Il suffit soit pour les nouveaux joueurs de rentrer un nom pour leur sauvegarde sur la page principale du jeu soit 
+soit pour les anciens joueurs de sélectioner leur sauvegarde dans le menu déroulant sur la même page.
+
+POur jouer à un niveau il suffit de cliquer sur ce dernier dans le menu de sélection des niveaux, les niveaux gris sont bloqués, pour les dévérouiller il suffit
+de réaliser le niveau précédent ou de réaliser un score suffisant dans le mode infini.
+
+Maintenant pour jouer il suffit de cliquer sur un chiffre et de recliquer là ou vous voulez le placer, pour utiliser les machines de calculs il faut placer un 
+nombre sur les deux cases colorés la machine s'occupera de faire le calcul pour vous.
+
+pour valider une commande il suffit de cliquer sur votre résultat et de le plcaer dans la zone de dépos jaune. si vous avez fait une erreur pas de soucis il faut 
+juste placer votre nombre éronné dans la zone de dépot, elle sert ausssi de poubelle.
