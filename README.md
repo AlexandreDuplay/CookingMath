@@ -9,11 +9,11 @@ Cooking Math est un jeu éducatif permetant au enfant en primaire de s'entrainer
 ###Liens
 
 - Pour jouer : **[Jeu en ligne](https://alexandreduplay.github.io/CookingMath/)**
-- [Documentation](http://madocumentation/)
-- [Code source](http://maforge/)
+- [Documentation // pas là](http://madocumentation/)
+- [Code source](https://github.com/AlexandreDuplay/CookingMath/)
 
 ###Licence
 
-Le code est sous licence libre  [GNU GPL v3](http://lienversmalicence)
+Le code est sous licence libre  [GNU GPL v3 // pas là](http://lienversmalicence)
 En l'état du projet, toutes les ressources multimédia ne sont pas libres, ce qui peut rendre problématique sa distribution.
-Voir [les crédits](http://mapagedecredits) pour plus de détails.
+Voir [les crédits // pas là](http://mapagedecredits) pour plus de détails.
